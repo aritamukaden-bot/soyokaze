@@ -1,0 +1,102 @@
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- トップ -->
+  <url>
+    <loc>https://soyo-kaze.net/index.html</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- 固定ページ -->
+  <url>
+    <loc>https://soyo-kaze.net/activites.html</loc>
+  </url>
+
+  <url>
+    <loc>https://soyo-kaze.net/daihyou.html</loc>
+  </url>
+
+  <url>
+    <loc>https://soyo-kaze.net/dantaigaiyou.html</loc>
+  </url>
+
+  <url>
+    <loc>https://soyo-kaze.net/jisseki.html</loc>
+  </url>
+
+  <url>
+    <loc>https://soyo-kaze.net/nav.html</loc>
+  </url>
+
+  <!-- イベント -->
+  <url>
+    <loc>https://soyo-kaze.net/event/event.html</loc>
+  </url>
+
+  <!-- お知らせ一覧 -->
+  <url>
+    <loc>https://soyo-kaze.net/itirannenws/itirannenws.html</loc>
+  </url>
+
+  <!-- NEWS記事 -->
+  <url>
+    <loc>https://soyo-kaze.net/news/20250419news.html</loc>
+  </url>
+  <url>
+    <loc>https://soyo-kaze.net/news/20250502ゴールデンウィーク.html</loc>
+  </url>
+  <url>
+    <loc>https://soyo-kaze.net/news/20250507防災訓練.html</loc>
+  </url>
+  <url>
+    <loc>https://soyo-kaze.net/news/20250524うねうね防災.html</loc>
+  </url>
+  <url>
+    <loc>https://soyo-kaze.net/news/20250608ジューンフェスタ.html</loc>
+  </url>
+  <url>
+    <loc>https://soyo-kaze.net/news/20250614つなぐマーケット.html</loc>
+  </url>
+  <url>
+    <loc>https://soyo-kaze.net/news/20250704あばれ祭り1.html</loc>
+  </url>
+  <url>
+    <loc>https://soyo-kaze.net/news/20250704あばれ祭り2.html</loc>
+  </url>
+  <url>
+    <loc>https://soyo-kaze.net/news/20250806防災マスター.html</loc>
+  </url>
+
+  <!-- SALE -->
+  <url>
+    <loc>https://soyo-kaze.net/sale/sale.html</loc>
+  </url>
+
+  <!-- つながり活動 -->
+  <url>
+    <loc>https://soyo-kaze.net/tunagari/index.html</loc>
+  </url>
+
+  <url>
+    <loc>https://soyo-kaze.net/tunagari/activites_tunagari_noto_abarematuri.html</loc>
+  </url>
+  <url>
+    <loc>https://soyo-kaze.net/tunagari/activites_tunagari_noto_sonota.html</loc>
+  </url>
+  <url>
+    <loc>https://soyo-kaze.net/tunagari/activites_tunagari_noto_tunaguma-ketto.html</loc>
+  </url>
+  <url>
+    <loc>https://soyo-kaze.net/tunagari/activites_tunagari_noto.html</loc>
+  </url>
+  <url>
+    <loc>https://soyo-kaze.net/tunagari/activites_tunagari_tohoku_team-ookawa.html</loc>
+  </url>
+  <url>
+    <loc>https://soyo-kaze.net/tunagari/activites_tunagari_tohoku.html</loc>
+  </url>
+
+</urlset>

@@ -1,0 +1,336 @@
+.page-hero {
+  position: relative;
+  height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #fff;
+  font-size: 2.5rem;
+  letter-spacing: 0.1em;
+
+  /* ← 相対パスを修正 */
+  background:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url('../image/LINE_ALBUM_202574-76 あばれ祭りpart2_251024_4.jpg') center/cover no-repeat;
+  /* 必要なら効きを強める */
+  /* background-blend-mode: multiply; */
+}
+
+.section {
+  max-width: 800px;   
+  margin: 0 auto;     
+  padding: 2rem 1rem; 
+  text-align: center;
+  
+}
+.section p{
+text-align: justify;
+}
+
+
+/* 活動紹介セクション全体 */
+.activities {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+
+
+/* 各ボタン共通デザイン */
+.activity-link {
+  display: block;
+  width: 80%;            /* 画面全幅にせず中央寄せ */
+  max-width: 800px;      /* 最大幅制限 */
+  margin: 1.5rem auto;   /* 中央に配置 */
+  text-decoration: none;
+  color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ボタン内テキスト */
+.activity-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  padding: 3rem 0; /* 帯の高さ調整 */
+}
+
+/* ホバー時：少し明るく・浮く */
+.activity-link:hover {
+  filter: brightness(1.15);
+  transform: translateY(-4px);
+}
+
+/* --- 背景設定（写真＋半透明） --- */
+.activity-link.tunagari-noto {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url('../image/noto.jpg') center/cover no-repeat;
+}
+
+.activity-link.tunagari-tohoku {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url('../image/tohoku.jpg') center/cover no-repeat;
+}
+
+.activity-link.buppan {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url('../image/buppan.jpg') center/cover no-repeat;
+}
+
+.activity-link.event {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url('../image/event.jpg') center/cover no-repeat;
+}
+
+/* 4つの活動を2×2グリッドにする */
+.activities {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2列 */
+  gap: 20px;
+  max-width: 900px; /* 中央に収める */
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* タイトル（主要な活動紹介）は2列ぶん使って上に1行で表示 */
+.activities > h2 {
+  grid-column: 1 / -1;  /* グリッド全幅をまたぐ */
+  margin-bottom: 1rem;  /* 下のカードとの余白 */
+  text-align: center;
+}
+
+.activities .activity-link {
+  width: 100%; /* グリッドに合わせる */
+  max-width: none;
+  margin: 0;   /* 余白リセット */
+}
+
+/* スマホは1列に戻す */
+@media (max-width: 768px) {
+  .activities {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+/* 以下画面上の表 */
+/* セクション全体（背景画像） */
+.soyokaze-concept {
+  position: relative;
+  padding: 80px 0;
+  background-image: url("../image/LINE_ALBUM_202574-76 あばれ祭りpart2_251024_1.jpg"); /* ←ここを自分の画像に */
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+
+/* うっすら暗くするオーバーレイ */
+.soyokaze-concept__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* 白い大きな枠 */
+.soyokaze-concept__frame {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1200px;
+  border: 3px solid #ffffff;
+  padding: 60px 40px;
+  box-sizing: border-box;
+}
+
+/* 枠の中身 */
+.soyokaze-concept__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* 見出し */
+.soyokaze-concept__title {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin: 0 0 8px;
+}
+
+.soyokaze-concept__subtitle {
+  font-size: 18px;
+  margin: 0 0 24px;
+}
+
+/* カラーバー（ORIGAMIっぽいやつ） */
+.soyokaze-concept__bar {
+  width: 220px;
+  height: 6px;
+  margin: 0 auto 24px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #1f7f96, #f06c7a, #2e8b57);
+}
+
+.soyokaze-concept__lead {
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+/* カードの並び */
+.soyokaze-concept__cards {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+/* 各カード */
+.soyokaze-card {
+  min-width: 260px;
+  max-width: 360px;
+  padding: 32px 28px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: center;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.6); /* デフォ（上から色を上書き） */
+}
+
+/* 色違い（透け感あり） */
+.soyokaze-card--blue {
+  background: rgba(13, 87, 116, 0.92);
+}
+
+.soyokaze-card--green {
+  background: rgba(46, 139, 87, 0.92);
+}
+
+.soyokaze-card__title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.soyokaze-card__text {
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+  .soyokaze-concept {
+    padding: 60px 0;
+  }
+
+  .soyokaze-concept__frame {
+    padding: 40px 16px;
+  }
+
+  .soyokaze-concept__title {
+    font-size: 30px;
+  }
+
+  .soyokaze-concept__lead {
+    font-size: 16px;
+  }
+
+  .soyokaze-card {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+.soyokaze-concept .section {
+  max-width: none !important;
+}
+.soyokaze-concept__cards {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 32px;
+  flex-wrap: nowrap; /* ←横並び固定 */
+}
+
+/* ================================
+   活動紹介ページ – スマホ最適化
+   ================================ */
+
+@media (max-width: 768px) {
+
+  /* ページタイトル（ヒーロー） */
+  .page-hero {
+    height: 18vh;
+    font-size: 1.8rem;
+  }
+
+  /* セクションの共通レイアウト */
+  .section {
+    padding: 1.5rem 1rem;
+    text-align: left;
+  }
+  .section h2 {
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .section p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  /* コンセプト枠（大きな白い枠） */
+  .soyokaze-concept__frame {
+    padding: 30px 16px;
+  }
+  .soyokaze-concept__title {
+    font-size: 26px;
+  }
+  .soyokaze-concept__subtitle {
+    font-size: 14px;
+  }
+  .soyokaze-concept__lead {
+    font-size: 15px;
+  }
+
+  /* カード部分：100%幅に */
+  .soyokaze-concept__cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: nowrap !important;
+  }
+  .soyokaze-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 主要な活動紹介 1 列表示 */
+  .activities {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+    padding-bottom: 1rem;
+  }
+
+  .activity-title {
+    padding: 2.2rem 0;
+    font-size: 1.5rem;
+  }
+}
+
+.photo{
+  display: flex;
+  
+}
+.photo>img{
+  width: 20%;
+}

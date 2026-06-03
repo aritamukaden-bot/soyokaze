@@ -1,0 +1,175 @@
+/* ==========================
+   サイドメニュー（右から出てくるナビ）
+   ========================== */
+
+/* 画面外に隠れている状態 */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  max-width: 80%;
+  height: 100vh;
+  background: #ffffff;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.menu {
+  font-size: 30px;
+}
+
+/* 「開く」クラスが付いたときに画面内にスライドイン */
+.side-menu.is-open {
+  transform: translateX(0);
+}
+
+/* 中のヘッダー部分（ロゴ＋×ボタン） */
+.side-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.side-menu-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ✅ ここ重要：グローバルな img{width:100%} に勝つ */
+.side-menu-brand img {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  flex: 0 0 auto;
+}
+
+.side-close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* ナビ本文 */
+.side-menu-nav {
+  margin-top: 10px;
+}
+
+.side-menu-group {
+  margin-bottom: 20px;
+}
+
+.side-menu-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.side-menu-group ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-menu-group li + li {
+  margin-top: 4px;
+}
+
+.side-menu-group a {
+  text-decoration: none;
+  color: #333;
+  font-size: 15px;
+}
+
+.side-menu-group a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================
+   ヘッダー（上部固定）
+   ========================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* ✅ 文字が縦に潰れにくい */
+
+  padding: 4px 20px 3px 5px;
+  z-index: 900;
+}
+
+/* 右上のボタン（ロゴ＋menu） */
+.nav-toggle {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: row;   /* ✅ column をやめて横並びに */
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 6px 8px;
+}
+
+/* ✅ ここが無いと画像が暴れる：ボタン内のアイコン固定 */
+.logo-icon {
+   width: 60px;
+  height: 60px;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+/* menu文字 */
+.nav-toggle .menu {
+  font-size: 16px;  /* ✅ 30だと大きすぎて崩れやすい */
+  line-height: 1;
+}
+
+/* 左上ロゴ（テキストの場合） */
+.header-logo .logo-text {
+  display: inline-block;
+  line-height: 1.1;
+}
+
+/* もし今後 .header-logo img を使うなら */
+.header-logo img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+  border: 3px solid #2ecc71;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  background: #fff;
+}
+
+@media (max-width: 600px) {
+  .logo-icon {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .nav-toggle .menu {
+    font-size: 14px;
+  }
+
+  .header-logo img {
+    width: 32px;
+    height: 32px;
+  }
+}

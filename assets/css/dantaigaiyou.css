@@ -1,0 +1,18 @@
+.hero-phto{
+  width: 100%;
+  height: auto;
+  display: block; 
+}
+
+.section {
+  width: 90%;
+  max-width: 900px;  /* 読みやすい幅 */
+  margin: 0 auto;    /* セクション全体を中央に配置 */
+  padding: 0 30px;   /* 左右に16pxの余白＝スマホでも読みやすい */
+   text-align: center;
+}
+
+.section p {
+  text-align: left;
+  line-height: 1.8;  /* 読みやすさUP */
+}

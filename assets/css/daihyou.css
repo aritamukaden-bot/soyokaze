@@ -1,0 +1,114 @@
+/* 写真＋プロフィールの横並びブロック */
+.represent-intro {
+  max-width: 1100px;
+  margin: 3rem auto 2rem;
+  padding: 0 1.5rem;
+}
+
+.represent-intro-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* 左側の大きな写真 */
+.represent-photo-wrap {
+  flex: 0 0 48%;              /* 左右ほぼ半分ずつ */
+}
+
+.represent-photo-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* 右側のプロフィールテキスト */
+.represent-profile {
+  flex: 1;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* 右側のリストの体裁（既存profile-listを活かしつつ微調整） */
+.represent-profile .profile-list {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.represent-profile .profile-list li {
+  border-bottom: none;
+  padding: 4px 0;
+}
+
+/* 下の長文（代表の言葉）部分 */
+.represent-message {
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+  font-size: 1rem;
+  line-height: 2;
+}
+
+.represent-message h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.represent-message p {
+  margin-bottom: 1.5rem;
+}
+
+/* もともとの .section の中央寄せを打ち消す */
+.section {
+  text-align: left;
+}
+
+/* スマホ対応：縦並びにする */
+@media (max-width: 768px) {
+  .represent-intro-inner {
+    flex-direction: column;
+  }
+  .represent-photo-wrap,
+  .represent-profile {
+    flex: 1 1 auto;
+  }
+}
+
+.hero-phto{
+  width: 100%;
+  height: auto;
+  display: block; 
+}
+
+/* 代表写真の最大サイズを制限 */
+.represent-photo-wrap img {
+  max-width: 250px;   /* ← ここで大きさ調整（300〜380pxがキレイ） */
+  height: auto;
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* ================================
+   自己紹介（プロフィール）を枠で囲む
+   ================================ */
+.represent-intro {
+  max-width: 1100px;
+  margin: 3rem auto 3rem;
+  padding: 2.5rem 2rem;
+
+  background: #ffffff;           /* 白背景 */
+  border: 1px solid #e0e0e0;     /* 薄いグレーの枠 */
+  border-radius: 16px;           /* 角を丸く */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
+  /* ほんのり影でカード感を出す */
+}
+
+/* スマホ対応：余白を少し小さく */
+@media (max-width: 768px) {
+  .represent-intro {
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+  }
+}

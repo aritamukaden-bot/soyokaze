@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>防災×魅力発信インタラクティブマップ | Noto & Tohoku</title>
+
+
+<!-- Leaflet CSS -->
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+crossorigin=""
+/>
+
+
+<!-- App styles -->
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+<div id="map"></div>
+
+
+<div class="header">
+<h1>防災×魅力発信インタラクティブマップ</h1>
+<p>能登・東北の活動を写真や音声で体験できます。<br/>チェックで表示切替 → 地点をクリックで詳細。</p>
+<a href="../index.html">ホームに戻る</a>
+</div>
+
+
+<div class="legend">
+<h3>凡例</h3>
+<div class="item"><span class="swatch tunagari"></span>つながり</div>
+<div class="item"><span class="swatch event"></span>イベント</div>
+<div class="item"><span class="swatch report"></span>レポート</div>
+<div class="item"><span class="swatch Lerning"></span>学び</div>
+
+</div>
+
+
+<!-- Leaflet JS -->
+<script
+src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""
+></script>
+
+
+<!-- App script -->
+<script src="assets/js/app.js"></script>
+</body>
+</html>

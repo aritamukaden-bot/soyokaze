@@ -1,0 +1,85 @@
+html, body { height: 100%; margin: 0; }
+#map { height: 100%; width: 100%; }
+
+
+/* UI: フローティング・ヘッダー */
+.header {
+position: absolute; z-index: 1000; top: 12px; left: 12px;
+background: rgba(255,255,255,0.92); backdrop-filter: blur(6px);
+border-radius: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+padding: 10px 14px; font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif;
+}
+.header h1 { font-size: 16px; margin: 0 0 4px 0; }
+.header p { font-size: 12px; margin: 0; color: #333; }
+
+
+/* Leaflet コントロールの見た目微調整 */
+.leaflet-control-layers {
+border-radius: 12px !important;
+overflow: hidden;
+}
+
+
+/* ポップアップのメディアをきれいに表示 */
+.popup-media { max-width: 260px; }
+.popup-media img { width: 100%; height: auto; border-radius: 10px; display:block; }
+.popup-media audio { width: 100%; margin-top: 6px; }
+.popup-media .caption { font-size: 12px; color: #333; margin-top: 6px; }
+.popup-media video {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 6px;
+  display: block;
+}
+
+ /*   ポップアップの全体の最大サイズを画面依存にする*/
+.leaflet-popup-content {
+  max-width: 80vw;     /* 画面幅の80%を上限 */
+  max-height: 60vh;    /* 画面高の60%を上限 */
+  overflow: auto;
+}
+
+leaflet-popup-content img,
+.leaflet-popup-content video,
+.popup-media img,
+.popup-media video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  margin-top: 6px;
+}
+
+.popup-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #0066cc;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.popup-link:hover {
+  color: #004499;
+  text-decoration: underline;
+}
+
+
+
+
+
+/* 凡例（Legend） */
+.legend {
+position: absolute; right: 12px; bottom: 12px; z-index: 1000;
+background: rgba(255,255,255,0.92); backdrop-filter: blur(6px);
+border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+padding: 10px 12px; font-size: 12px; line-height: 1.4;
+font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', 'Meiryo', sans-serif;
+}
+.legend h3 { font-size: 12px; margin: 0 0 6px; }
+.legend .item { display:flex; align-items:center; gap:8px; margin: 4px 0; }
+.legend .swatch { width: 10px; height: 10px; border-radius: 50%; display:inline-block; }
+.swatch.tunagari { background:#e74c3c; }
+.swatch.event { background:#2980b9; }
+.swatch.report { background:#16a085; }
+.swatch.Lerning { background:#8e4898; }

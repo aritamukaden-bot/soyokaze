@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>学生団体そよかぜ - 団体ログイン（演習用）</title>
+    <style>
+        :root {
+            --hacker-green: #00ff66;
+            --soyokaze-blue: #007acc;
+            --hacker-bg: #0a0e14;
+            --panel-bg: #111827;
+            --terminal-bg: #010409;
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            background-color: var(--hacker-bg);
+            font-family: 'Consolas', 'Courier New', 'Helvetica Neue', Arial, sans-serif;
+            color: #f0f6fc;
+            overflow: hidden;
+        }
+
+        /* 画面を左6割：右4割に分割 */
+        .main-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* --------------------------------------------------
+           左側（6割）：ユーザー操作・ログイン画面
+        -------------------------------------------------- */
+        .operation-panel {
+            width: 60%;
+            padding: 40px;
+            overflow-y: auto;
+            border-right: 2px solid #1f2937;
+            box-sizing: border-box;
+        }
+
+        .system-title {
+            font-size: 1.6rem;
+            color: var(--hacker-green);
+            border-bottom: 2px solid var(--hacker-green);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ポート変更エリア */
+        .port-setting-box {
+            background: #1f2937;
+            border: 1px solid #4b5563;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .port-setting-box label { font-weight: bold; color: #ffaa00; }
+        .port-setting-box input { background: #000; border: 1px solid #ffaa00; color: #ffaa00; padding: 8px; width: 80px; text-align: center; font-family: monospace; }
+        .port-setting-box button { background: #ffaa00; color: #000; border: none; padding: 8px 15px; font-weight: bold; cursor: pointer; border-radius: 4px; }
+
+        /* 本物のサイトを模したログインフォーム */
+        .login-form-card {
+            background: #ffffff;
+            color: #333333;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        .login-form-card h2 { margin-top: 0; font-size: 1.4rem; color: #111; border-bottom: 2px solid var(--soyokaze-blue); padding-bottom: 8px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.9rem; font-weight: bold; margin-bottom: 5px; color: #555; }
+        .form-group input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; box-sizing: border-box; background: #fff; color: #333; }
+        .login-btn { background: var(--soyokaze-blue); color: white; border: none; padding: 14px; width: 100%; font-size: 1.1rem; font-weight: bold; border-radius: 4px; cursor: pointer; transition: 0.2s; }
+        .login-btn:hover { background: #005999; }
+
+        /* ログイン成功後に表示される隠し個人情報ページ */
+        #secretInfoPage {
+            background: #052e16;
+            border: 2px solid var(--hacker-green);
+            padding: 30px;
+            border-radius: 8px;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .info-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .info-table th, .info-table td { border: 1px solid var(--hacker-green); padding: 12px; text-align: left; }
+        .info-table th { background: #022c22; color: var(--hacker-green); }
+
+        /* --------------------------------------------------
+           右側（4割）：プログラム実行画面・ハッカー機能群
+        -------------------------------------------------- */
+        .simulation-panel {
+            width: 40%;
+            background-color: var(--terminal-bg);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: inset 0 0 20px rgba(0, 255, 102, 0.15);
+            box-sizing: border-box;
+        }
+
+        .terminal-header { font-size: 0.8rem; color: #4b5563; margin-bottom: 15px; border-bottom: 1px solid #1f2937; padding-bottom: 5px; text-transform: uppercase; }
+        .scrolling-numbers { font-size: 2.5rem; text-align: center; margin-bottom: 15px; color: var(--hacker-green); height: 50px; font-weight: bold; letter-spacing: 3px; }
+        .log-area { flex-grow: 1; overflow-y: auto; font-size: 0.85rem; white-space: pre-wrap; color: #a9ffad; line-height: 1.4; background: #000; padding: 15px; border-radius: 4px; border: 1px solid #1f2937; margin-bottom: 20px; height: 180px; }
+
+        /* ハッカー用ツールボタン群 */
+        .hacker-tools-title { font-size: 1rem; color: #fff; margin-bottom: 10px; border-left: 4px solid var(--hacker-green); padding-left: 10px; font-weight: bold; }
+        .tool-box { background: var(--panel-bg); border: 1px solid #374151; padding: 15px; border-radius: 6px; margin-bottom: 12px; }
+        .tool-box h4 { margin: 0 0 8px 0; font-size: 0.95rem; color: #fff; }
+        .tool-btn { background: var(--hacker-green); color: #000; border: none; padding: 10px; width: 100%; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 0.85rem; border-radius: 4px; }
+        .tool-btn:hover { background: #00cc55; }
+        
+        /* ロック状態のスタイル */
+        .tool-box.locked { opacity: 0.3; filter: grayscale(1); }
+        .tool-box.locked .tool-btn { background: #4b5563; cursor: not-allowed; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #374151; }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    
+    <div class="operation-panel">
+        <div class="system-title">Soyokaze Network Console</div>
+
+        <div class="port-setting-box">
+            <div>
+                <label>現在の接続ポート番号: </label>
+                <input type="number" id="portInput" value="">
+            </div>
+            <button onclick="changePort()">ポート変更を保存</button>
+        </div>
+
+        <div id="loginFormArea" class="login-form-card">
+            <h2>学生団体そよかぜ - 団体員ログイン</h2>
+            <div class="form-group">
+                <label>ユーザーID (メールアドレス)</label>
+                <input type="text" id="adminId" >
+            </div>
+            <div class="form-group">
+                <label>5桁のログインパスワード (PIN)</label>
+                <input type="text" id="adminPassInput" placeholder="3桁の数字を入力" maxlength="10">
+            </div>
+            <button onclick="tryNormalLogin()" class="login-btn">ログイン</button>
+        </div>
+
+        <div id="secretInfoPage">
+            <h2 style="color: var(--hacker-green); margin-top:0;">🔓 【警告】データベース内部アクセス成功</h2>
+            <p>登録個人情報の取得に成功しました。</p>
+            
+            <table class="info-table">
+                <tr><th>項目</th><th>復元データ</th></tr>
+                <tr><td>団体員氏名</td><td>山田 太郎 (Taro Yamada)</td></tr>
+                <tr><td>役職</td><td>広報・マップ担当</td></tr>
+                <tr><td>電話番号</td><td>090-1234-5678</td></tr>
+                <tr><td>メールアドレス</td><td>yamada@soyo-kaze.net</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="simulation-panel">
+        <div class="terminal-header">EXECUTION TERMINAL MONITOR</div>
+        <div id="scrollingDisplay" class="scrolling-numbers">---</div>
+        <div id="logArea" class="log-area">システム待機中...
+ログイン、または右側の各種ハッカーツールを実行してください。</div>
+
+        <div class="hacker-tools-title">ハッカーアシスト機能群</div>
+
+        <div class="tool-box">
+            <h4>① ポート偵察プログラム (Port Scan)</h4>
+            <button onclick="playPortScan()" class="tool-btn">ポートスキャン実行</button>
+        </div>
+
+        <div class="tool-box locked" id="bruteForceBox">
+            <h4>② パスワード総当たりアタック (Brute Force)</h4>
+            <button onclick="playBruteForce()" class="tool-btn" id="bruteBtn" disabled>総当たりマシーン起動 </button>
+        </div>
+
+        <div class="tool-box">
+            <h4>③ 暗号データ復号プログラム (Decryptor)</h4>
+            <button onclick="playDecrypt()" class="tool-btn">ソース内の共通鍵で復号</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    console.log('共通鍵は4')
+    const LOG = document.getElementById('logArea');
+    const SCROLL = document.getElementById('scrollingDisplay');
+    let scanClickCount = 0;
+
+    // システム内部の正解値設定
+    const CORRECT_PIN = "732"; // 3桁の正解パスワード
+    let CURRENT_PORT = 443;     // そよかぜの標準ポート（HTTPS）
+
+    function addLog(msg) {
+        LOG.innerText += `\n> ${msg}`;
+        LOG.scrollTop = LOG.scrollHeight;
+    }
+
+    // ── ポート変更のギミック ──
+    function changePort() {
+        const inputPort = parseInt(document.getElementById('portInput').value);
+        // 通常のWeb用ポート(443)以外に動かそうとした場合
+        if (inputPort !== 443 && inputPort !== 80 ){
+            alert(`【システム警告】\nポートを [ ${inputPort} ] に変更しようとしましたが、ファイアウォールおよびサーバー設定により拒否されました。80番や他のポートへ動かしても変更できません。`);
+            addLog(`[REJECT] ポートを ${inputPort} 番へ変更する要求は拒否されました。通信不可。`);
+          
+        } else if(inputPort == 80){addLog("ポート80（HTTP標準窓口）への接続を維持しています。");}
+        else{
+            addLog("ポート443（HTTPS標準窓口）への接続を維持しています。");
+        }
+    }
+  const CORRECT_EMAIL = "soyokaze1.2024@gmail.com";
+   
+   // ── 手動ログイン試行（左画面のボタン） ──
+   // ── 手動ログイン試行（左画面のボタン） ──
+    function tryNormalLogin() {
+        // メールアドレス入力欄とパスワード入力欄の値を取得
+        const userEmail = document.getElementById('adminId').value.trim();
+        const userInput = document.getElementById('adminPassInput').value.trim();
+        
+        // 【仕様】jimori が入力されたら総当たりマシーンを解放
+        if (userInput === "jimori") {
+            addLog("▶ [隠しコマンド感知] パスワード総当たりアタック(②)が解放されました！");
+            document.getElementById('bruteForceBox').classList.remove('locked');
+            document.getElementById('bruteBtn').disabled = false;
+            document.getElementById('bruteBtn').innerText = "総当たり攻撃（自動探索）を開始";
+            document.getElementById('adminPassInput').value = ""; // 入力欄をクリア
+            return;
+        }
+
+        // 正解のメールアドレス（グローバルで定義されていない場合はここで定義）
+        const CORRECT_EMAIL = "soyokaze1.2024@gmail.com";
+
+        // 【条件判定】メールアドレスとパスワードの両方が一致しているか
+        if (userEmail === CORRECT_EMAIL && userInput === CORRECT_PIN) {
+            SCROLL.innerText = userInput;
+            
+            // 💡 現在入力されているポート番号を取得
+            const inputPort = parseInt(document.getElementById('portInput').value);
+
+            // 💡 ポートが80番ならそのままクリア（秘密のページを表示）
+            if (inputPort === 80) {
+                addLog(`🟢 [手動認証成功] 安全でないポート(80)経由のため、データが暗号化されずに漏洩しています！`);
+                showSecretPage();
+            } else {
+                // 💡 80番以外（443など）なら、暗号復号プログラムを発動させる
+                addLog(`🟡 [認証成功] ポート [ ${inputPort || '未指定'} ] は通信が暗号化されています。`);
+                addLog(`▶ 安全な通信を突破するため、暗号データ復号プログラム（③）を強制起動します...`);
+                
+                SCROLL.innerText = "ENC"; // 画面を暗号化状態の表示にする
+                
+                // 右側の「③ 暗号データ復号プログラム」の関数をここで呼び出す
+                playDecrypt();
+            }
+        } else {
+            // どこが間違っているかに応じてログを変える
+            if (userEmail !== CORRECT_EMAIL && userInput === CORRECT_PIN) {
+                addLog(`❌ [認証拒否] ユーザーID（メールアドレス）が正しくありません。`);
+            } else if (userEmail === CORRECT_EMAIL && userInput !== CORRECT_PIN) {
+                addLog(`❌ [認証拒否] パスワード [ ${userInput || '未入力'} ] が違います。`);
+            } else {
+                addLog(`❌ [認証拒否] ユーザーIDおよびパスワードが違います。`);
+            }
+            SCROLL.innerText = "ERR";
+        }
+    }
+
+    // ── 機能①：ポートの探索 ──
+    function playPortScan() {
+        scanClickCount++;
+        let targetPorts = [];
+
+        if (scanClickCount === 1) {
+        addLog("周辺ポートの探索（ポートスキャン）を開始...");
+        targetPorts = [21, 22, 25, 110, 443, 3306];
+    } else if (scanClickCount === 2) {
+        addLog("さらに深い階層のポート探索を開始...");
+        targetPorts = [50, 60, 70, 80, 90]; // 80番が含まれる配列
+    } else {
+        addLog("すでにすべてのポートスキャンは完了しています。");
+        return; // 3回目以降は何もしない（または1回目に戻すなら scanClickCount = 0 にする）
+    }
+        let idx = 0;
+        
+        const interval = setInterval(() => {
+            if (idx >= targetPorts.length) {
+                clearInterval(interval);
+                if (scanClickCount === 1) {
+                addLog("スキャン完了。ハッキング経路を特定。");
+                addLog("▶ さらに検索する場合はもう一度押してください。");
+            } else if (scanClickCount === 2) {
+                addLog("スキャン完了。ハッキング経路を特定");
+            }
+            return;
+        
+            }
+            let p = targetPorts[idx];
+            SCROLL.innerText = p;
+            if (p === 443) {
+                addLog(`Port ${p}: OPEN (HTTPS) `);
+            } else if(p===80){
+                addLog(`Port ${p}: OPEN (HTTP) `);
+            }else
+            {
+                addLog(`Port ${p}: CLOSED`);
+            }
+            idx++;
+        }, 300);
+    }
+
+    // ── 機能②：パスワード総当たり（3桁カウントアップ） ──
+    function playBruteForce() {
+    addLog("自動総当たりアタック（高度なブルートフォース：5桁）を起動。00000から超高速探索を開始...");
+    
+    let currentCheck = 0;
+    
+    const interval = setInterval(() => {
+        // 1ミリ秒の間に100回チェックをループ
+        for (let i = 0; i < 100; i++) {
+            if (currentCheck > 99999) {
+                clearInterval(interval);
+                const elapsedTime = ((100000 * 15) / 1000).toFixed(3);
+                addLog(`❌ 探索失敗: すべての組み合わせを試しましたが一致しませんでした。(${elapsedTime} 秒)`);
+                return;
+            }
+
+            let searchStr = String(currentCheck).padStart(5, '0');
+            
+            if (currentCheck % 20 === 0) {
+                SCROLL.innerText = searchStr; // 画面のパラパラ更新
+            }
+            
+            if (searchStr === CORRECT_PIN) {
+                clearInterval(interval);
+                SCROLL.innerText = searchStr;
+                
+                // 💡 ここがポイント：実際のタイマーの速さに関係なく、1回＝15msとして計算
+                const totalTrials = currentCheck + 1;
+                const elapsedTime = ((totalTrials * 15) / 1000).toFixed(3); // 秒換算
+                
+                addLog(`▶ [パスワード的中！] 自動探索プログラムが [ ${searchStr} ] を割り出しました！`);
+                addLog(`⏱️ [解析完了] 解読にかかった時間: ${elapsedTime} 秒`);
+                
+                
+                return;
+            }
+            
+            currentCheck++;
+        }
+    }, 1);
+}
+
+    // ── 機能③：暗号化の解読（ソース内の隠しメッセージを使う） ──
+    function playDecrypt() {
+        addLog("データベース内部の『暗号化された個人情報データ』をスキャン中...");
+        
+        // 【修正】エラーの原因だった if(p===80) の構文バグを安全なログ出力に修正しました
+        addLog("暗号データ: JPEK{Xevi_Ceqehe_090-1234-5678}");
+        addLog("▶ ブラウザでこのページの『ソースを表示』し、隠された「共通鍵の数字」を見つけてください。");
+       
+        // 授業用のヒントポップアップ
+        let userKey = prompt("ソースコードに隠されている【共通鍵の数字】を入力してください：");
+        if (userKey === "4") {
+            SCROLL.innerText = "OK";
+            addLog("🟢 共通鍵の一致を確認！アルゴリズムを復元し、暗号データを解読します...");
+            setTimeout(() => {
+                alert("暗号解除成功！左側の画面に個人情報が復元されました。");
+                showSecretPage();
+            }, 1000);
+        } else {
+            addLog("❌ エラー: 共通鍵が正しくありません。解読失敗。");
+            SCROLL.innerText = "X";
+        }
+    }
+
+    // ── ログイン成功後の共通処理（個人情報ページへ遷移） ──
+    function showSecretPage() {
+        // ログイン画面を非表示にして、個人情報ページを表示する
+        document.getElementById('loginFormArea').style.display = "none";
+        document.getElementById('secretInfoPage').style.display = "block";
+        addLog("🎉 【完了】すべてのミッションがクリアされました。個人情報データを閲覧可能です。");
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1174 @@
+/* ------ トップの左右レイアウト ------ */
+@font-face {
+  font-family: 'KachoFuugetsuP';
+  src: url('../fonts/katyoup/kacho-fugetsu-p.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.logo-text,h1,h2{
+  font-family: 'KachoFuugetsuP', serif;
+}
+
+
+
+
+
+.top-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  width: 90%;
+  max-width: 1400px;
+  margin: 60px auto;
+}
+
+.left-intro {
+  flex: 1;
+}
+
+.left-intro img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.left-intro h2 {
+  margin-top: 16px;
+  font-size: 28px;
+  color: #004400;
+  line-height: 1.4;
+}
+
+.right-slider {
+  flex: 1;
+  min-width: 45%;
+}
+
+/* 右上のそよかぜアイコンの見た目 */
+.logo-icon {
+  width: 80px;      /* ← 好きなサイズに。40〜60pxくらいがオススメ */
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+/* ロゴにマウスを乗せたときの色変化＋menuの文字 */
+.logo-icon:hover,
+.nav-toggle > p {
+  filter: hue-rotate(30deg) saturate(1.4);
+}
+
+/* ロゴの背景（白い丸） */
+.nav-toggle .logo-icon {
+  background-color: #fff;
+  padding: 4px;
+  transition: background-color 0.3s ease;
+}
+
+
+
+.nav-toggle .logo-icon:hover{
+  background-color: #286986; /* 水色になる */
+}
+
+
+
+/* スマホ表示 */
+@media (max-width: 850px) {
+  .top-layout {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .right-slider {
+    width: 100%;
+  }
+}
+
+/* ============================
+   トップメインレイアウト
+   ============================ */
+
+.section-main {
+  padding: 60px 0;
+}
+
+.main_wrapper {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.comp-article-list.main {
+  display: flex;
+  gap: 40px;
+  align-items: stretch;
+}
+
+/* 左カラム（大きい写真） */
+.article_left {
+  flex: 3;
+  margin-top: 40px;
+}
+
+.article_link {
+  display: block;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  text-decoration: none;
+  color: inherit;
+}
+
+.article_img img {
+  width: 100%;
+  display: block;
+  height: 360px;
+  object-fit: cover;
+}
+
+.article_txt {
+  padding: 16px 20px 18px;
+}
+
+.article_txt .prefecture {
+  font-size: 14px;
+  color: #4CAF50;
+  margin-bottom: 4px;
+}
+
+.article_txt .article_title {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+.article_txt .article_meta {
+  font-size: 13px;
+  color: #777;
+}
+
+/* 右カラム */
+.article_right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  
+}
+
+
+
+/* タイトル＋イラスト */
+.main_txt_wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.main_ttl span {
+  display: block;
+  font-size: 24px;
+  line-height: 1.4;
+  color: #214b2b;
+}
+
+
+
+/* スライダー外枠 */
+.comp-banner-slider_show .slider_wrap {
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+
+
+/* スマホレイアウト */
+@media (max-width: 900px) {
+  .comp-article-list.main {
+    flex-direction: column;
+  }
+
+  .article_img img {
+    height: 260px;
+  }
+
+  #heroSlider.slider {
+    height: 50px;
+  }
+
+  .main_txt_wrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .illust_img img {
+    width: 90px;
+  }
+}
+@media (max-width: 768px) {
+  .slider--small {
+    height: 180px;
+  }
+}
+
+
+/* スマホ用（必要なら） */
+@media (max-width: 768px) {
+  .slider--small {
+    height: 180px;
+  }
+}
+/* 右側の小さいスライダー専用（詳細度を上げて slider.css に勝つ） */
+#heroSlider.slider.slider--small {
+  height: 300px;   /* ← 好きな高さに。まずは 200px くらい試してみて */
+}
+
+/* スマホ用（必要なら） */
+@media (max-width: 900px) {
+  #heroSlider.slider.slider--small {
+    height: 160px;  /* ← スマホで少し低めに */
+  }
+}
+
+.comp-banner-slider_show{
+    margin-top: 180px;
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   団体概要：横長の円＋3枚カード
+   ========================== */
+
+.overview-section {
+  margin: 80px 0;
+}
+
+.overview-inner {
+  max-width: 1400px;
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 左寄せ */
+  gap: 40px;
+}
+
+/* 左側：横長の“円”っぽい背景 */
+.overview-bg {
+  flex: 1;
+  background: #f5f6ef;          /* スクショみたいな薄い色 */
+  border-radius: 60px;          /* 横長の円っぽくする */
+  padding: 40px 50px;
+}
+
+/* 中の3枚カードを横並びに */
+.overview-cards {
+  display: flex;
+  gap: 30px;
+}
+
+.overview-card {
+  flex: 1;
+}
+
+.overview-card-img img {
+  width: 100%;
+  height: 160px;                /* 好みで調整 */
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.overview-card-body {
+  margin-top: 16px;
+}
+
+.overview-card-title {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #305636;
+}
+
+.overview-card-text {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* 右側：縦書き「団体概要」ボックス */
+.overview-side {
+  width: 120px;                 /* 右の余白・幅 */
+  display: flex;
+  justify-content: center;
+}
+
+.overview-title-box {
+  writing-mode: vertical-rl;    /* 縦書き */
+  border: 1px solid #333;
+  padding: 24px 10px;
+  font-size: 18px;
+  letter-spacing: 0.2em;
+  background: #fff;
+}
+
+/* スマホ対応：縦並びにする */
+@media (max-width: 900px) {
+  .overview-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .overview-bg {
+    width: 100%;
+    border-radius: 30px;
+    padding: 24px;
+  }
+
+  .overview-cards {
+    flex-direction: column;
+  }
+
+  .overview-side {
+    width: auto;
+    align-self: center;
+  }
+}
+
+
+/* =======================
+   団体概要へ飛ぶボタン
+   ======================= */
+
+.overview-btn-wrap {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.overview-btn {
+  display: inline-block;
+  padding: 14px 36px;
+  background: #31633c;     /* 深緑：ココロココ系の色 */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.overview-btn:hover {
+  background: #234b2b;
+  transform: translateY(-3px);
+}
+
+/* スマホ */
+@media (max-width: 900px) {
+  .overview-btn-wrap {
+    margin-top: 28px;
+  }
+}
+
+/* ==========================
+   代表紹介セクション
+   ========================== */
+
+.photo{
+  object-position: 50% 85%;
+}
+
+
+/* ==========================
+   活動紹介セクション
+   ========================== */
+
+.activity-section {
+  margin: 80px 0;
+}
+
+.activity-inner {
+  max-width: 1400px;
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* 左：縦書きタイトル */
+.activity-side {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+}
+
+.activity-title-box {
+  writing-mode: vertical-rl;
+  border: 1px solid #333;
+  padding: 24px 10px;
+  font-size: 18px;
+  letter-spacing: 0.2em;
+  background: #fff;
+}
+
+/* 右：丸角背景 */
+.activity-main {
+  flex: 1;
+  background: #f5f6ef;
+  border-radius: 60px;
+  padding: 40px 60px;
+  position: relative;
+}
+
+/* スライダー全体 */
+.activity-slider {
+  position: relative;
+}
+
+/* スライド窓 */
+.activity-slider-window {
+  overflow: hidden;
+}
+
+/* トラック（横並び） */
+.activity-slider-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+/* 1スライド = 全体幅ちょうど1枚 */
+.activity-slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+}
+
+/* カードの中身 */
+/* 活動紹介カード：左テキスト／右写真の横並び */
+.activity-card {
+  display: flex;
+  flex-direction: row-reverse;  /* ← 写真を右、文字を左にするポイント！ */
+  align-items: center;
+  gap: 40px;
+  max-width: 100%;
+}
+
+/* 右側の写真ブロック */
+.activity-card-img {
+  flex: 1;
+}
+
+/* 左側のテキストブロック */
+.activity-card-body {
+  flex: 1;
+}
+
+/* 写真を大きめに */
+.activity-card-img img {
+  width: 100%;
+  height: 380px;   /* ← 好きな大きさに変えてOK（400〜500くらいが綺麗） */
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+
+/* スマホでは縦並びに戻す */
+@media (max-width: 900px) {
+  .activity-card {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .activity-card-img img {
+    height: 190px;   /* もともとの指定と同じくらいでOK */
+  }
+}
+
+
+
+
+.activity-card-body {
+  margin-top: 16px;
+}
+
+.activity-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.activity-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: #265c3b;
+  color: #fff;
+  font-size: 13px;
+}
+
+.activity-place {
+  font-weight: 700;
+  color: #265c3b;
+}
+
+.activity-date {
+  font-size: 13px;
+  color: #8b5a3c;
+  margin-bottom: 6px;
+}
+
+.activity-title {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+
+
+.activity-card-img>.photo{
+  object-position: 50% 50%;
+}
+.activity-card-img>.photo2{
+  object-position: 60% 60%;
+}
+.activity-card-img>.photo3{
+  object-position: 50% 50%;
+}
+
+
+/* 矢印ボタン */
+.activity-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: none;
+  background: #265c3b;
+  color: #fff;
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-arrow--prev {
+  left: -40px;   /* 背景の外にはみ出させる */
+}
+
+.activity-arrow--next {
+  right: -40px;
+}
+
+/* 下のボタン2つ */
+.activity-btn-row {
+  margin-top: 32px;
+  display: flex;
+  gap: 16px;
+}
+
+.activity-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 15px;
+  text-align: center;
+}
+
+.activity-btn--sub {
+  background: #ebe5d8;
+  color: #265c3b;
+}
+
+.activity-btn--main {
+  background: #2f7b3b;
+  color: #fff;
+}
+
+/* スマホ対応 */
+@media (max-width: 900px) {
+  .activity-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .activity-main {
+    width: 100%;
+    padding: 24px 20px;
+    border-radius: 30px;
+  }
+
+  .activity-card-img img {
+    height: 190px;
+  }
+
+  .activity-arrow--prev {
+    left: 0;
+  }
+  .activity-arrow--next {
+    right: 0;
+  }
+
+  .activity-btn-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+
+/* ==========================
+   代表挨拶セクション
+   ========================== */
+
+.representative-section {
+  margin: 100px 0;
+}
+
+.representative-inner {
+  max-width: 1400px;
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* 左：縦書きタイトル */
+.representative-side {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+}
+
+.representative-title-box {
+  writing-mode: vertical-rl;
+  border: 1px solid #333;
+  padding: 24px 12px;
+  font-size: 18px;
+  background: #fff;
+  letter-spacing: 0.2em;
+}
+
+/* 右側：横長の丸背景 */
+.representative-bg {
+  flex: 1;
+  background: #f5f6ef;
+  padding: 40px 50px;
+  border-radius: 60px;
+}
+
+.representative-content {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* 写真 */
+.representative-photo img {
+  width: 300px;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* テキスト */
+.representative-message {
+  flex: 1;
+}
+
+.representative-text {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #333;
+}
+
+.representative-btn-wrap {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.representative-btn {
+  display: inline-block;
+  padding: 14px 36px;
+  background: #31633c;     /* 深緑 */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.representative-btn:hover {
+  background: #234b2b;
+  transform: translateY(-3px);
+}
+/* スマホ対応 */
+@media (max-width: 900px) {
+  .representative-inner {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .representative-bg {
+    width: 100%;
+    padding: 24px;
+    border-radius: 30px;
+  }
+
+  .representative-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .representative-photo img {
+    width: 90%;
+    height: auto;
+  }
+}
+
+
+
+
+
+/* ==========================
+   魅力紹介（特集記事スライダー）
+   ========================== */
+
+.feature-section {
+  background: #4ea046;          /* スクショのような緑 */
+  padding: 80px 0;
+  border-radius: 0 0 60px 60px;  /* 下側カーブ */
+  margin-bottom: 60px;
+}
+
+.feature-inner {
+  max-width: 1400px;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* スライダー窓 */
+.feature-slider-window {
+  overflow: hidden;
+  flex: 1;
+}
+
+/* 横並びトラック */
+.feature-slider-track {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+/* 1スライド */
+.feature-slide {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 0 0 100%;
+  gap: 50px;
+  padding: 20px 0;
+}
+
+/* 左側テキスト */
+.feature-text {
+  flex: 1;
+  color: #fff;
+}
+
+.feature-date {
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.feature-title {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.feature-series {
+  font-size: 14px;
+  margin-bottom: 16px;
+  opacity: 0.9;
+}
+
+.feature-tags span {
+  display: inline-block;
+  background: #fff;
+  color: #2f6532;
+  padding: 4px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  margin: 4px 6px 0 0;
+}
+
+/* 右側画像 */
+.feature-image {
+  position: relative;
+}
+
+.feature-image img {
+  width: 450px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 28px;
+}
+
+.feature-pref {
+  position: absolute;
+  right: 12px;
+  top: -32px;
+  background: #fff;
+  color: #2f6532;
+  padding: 4px 14px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* 矢印 */
+.feature-arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: #fff;
+  border: none;
+  color: #2f6532;
+  font-size: 26px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 16px;
+}
+
+.feature-prev {
+  margin-right: 30px;
+}
+
+.feature-next {
+  margin-left: 30px;
+}
+
+/* スマホ対応 */
+@media (max-width: 900px) {
+  .feature-slide {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .feature-image img {
+    width: 90%;
+    height: 220px;
+  }
+
+  .feature-title {
+    font-size: 22px;
+  }
+
+  .feature-arrow {
+    display: none;
+  }
+}
+
+
+.instagram-section {
+  padding: 60px 20px;
+   /* うすい水色（そよかぜっぽい） */
+}
+
+.instagram-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.instagram-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+
+/*お問い合わせ*/
+/* お問い合わせセクション */
+.contact-section {
+  margin: 80px 0;
+}
+
+.contact-inner {
+  max-width: 1400px;
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* 左側 */
+.contact-main {
+  flex: 1;
+}
+
+.contact-lead {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  color: #214b2b;
+  text-align: center;
+}
+
+/* 連絡手段を横に並べる */
+.contact-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.contact-item {
+  text-align: center;
+  flex: 1;
+}
+
+.contact-label {
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: #214b2b;
+}
+
+/* 画像デザイン */
+.contact-item img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto;
+}
+
+.mail-address {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* 右側の縦書きタイトル（団体概要と同じデザイン） */
+.contact-side {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-title-box {
+  writing-mode: vertical-rl;
+  border: 1px solid #333;
+  padding: 24px 10px;
+  font-size: 18px;
+  letter-spacing: 0.2em;
+  background: #fff;
+}
+
+/* スマホ対応 */
+@media (max-width: 900px) {
+  .contact-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .contact-wrapper {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .contact-side {
+    width: auto;
+    align-self: center;
+  }
+
+  .contact-item img {
+    width: 150px;
+    height: 150px;
+    border-radius: 16px;
+  }
+}
+
+
+.footer-p{
+   margin: 0 auto;
+  text-align: center;
+}
+
+:root{
+  --leaf1:#2ecc71; 
+  --leaf2:#27ae60; 
+  --leaf3:#1faa59;
+}
+
+.intro{
+  position:fixed; inset:0; z-index:9999; 
+  display:grid; place-items:center;
+  background:linear-gradient(#f7fff9,#ecfbf3);
+  overflow:hidden;
+  transition:opacity 1s ease;
+}
+.title{
+  position:absolute; 
+  text-align:center; 
+  font-weight:800; 
+  color:#08301f;
+  font-size:clamp(30px,6vw,70px);
+  opacity:1; 
+  transition:opacity 1s ease;
+}
+.hint{
+  position:fixed; left:50%; bottom:8vh;
+  transform:translateX(-50%);
+  background:#ffffffd9;
+  border:1px solid #e3efe7;
+  padding:10px 14px;
+  border-radius:12px;
+  font-weight:700;
+  color:#0e3a26;
+  z-index:10000;
+  transition:opacity .4s ease;
+}
+.hint.hide{ opacity:0; pointer-events:none; }
+
+
+/* ============================================
+   スマホ・タブレット時：縦書きタイトルを
+   上部の横書き見出しに置き換える
+   ============================================ */
+@media (max-width: 900px) {
+
+  /* 1) 既存の縦書きボックスを非表示にする */
+  .overview-side,
+  .activity-side,
+  .representative-side,
+  .contact-side {
+    display: none;
+  }
+
+  /* 2) 各セクションの上に横書きタイトルを出す */
+  .overview-section::before,
+  .activity-section::before,
+  .representative-section::before,
+  .contact-section::before {
+    display: block;
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: #333;
+  }
+
+  .overview-section::before {
+    content: "団体概要";
+  }
+
+  .activity-section::before {
+    content: "活動紹介";
+  }
+
+  .representative-section::before {
+    content: "代表挨拶";
+  }
+
+  .contact-section::before {
+    content: "お問い合わせ";
+  }
+}
+
+
+/* ==========================
+   Instagram（SnapWidget）をレスポンシブに
+   ========================== */
+.snapwidget-widget {
+  width: 100% !important;   /* 画面幅にフィットさせる */
+  max-width: 100%;
+  height: 1078px;           /* 高さはとりあえず元のまま。後で好みで調整OK */
+  border: none;
+  display: block;
+}
+
+/* スマホでは高さも少し低めにしたい場合（お好みで） */
+@media (max-width: 600px) {
+  .snapwidget-widget {
+    height: 700px !important;  /* もう少し短くしたければここを変える */
+  }
+}
+
+.irasuto{
+  
+  max-width: 400px;
+
+}
+/* 代表挨拶セクションのイラスト位置調整 */
+.representative-inner {
+  position: relative;  /* イラストの基準にする */
+}
+
+
+/* イラストの大きさ */
+.illust_img img {
+  width: 180px;     /* 好きな大きさに調整：150〜220px くらいがバランス良い */
+  height: auto;
+}
+/* ==========================
+   魅力発信セクション右下イラスト
+   ========================== */
+.feature-section {
+  position: relative; /* 絶対配置の基準にする */
+}
+
+.feature-illust {
+  position: absolute;
+  right: 40px;   /* 右端からの距離：調整OK */
+  bottom: 20px;  /* 下端からの距離：調整OK */
+  z-index: 2;    /* スライダーより手前に出す */
+}
+
+.feature-illust img {
+  width: 150px;  /* 大きさ。120〜180pxくらい好みで */
+  height: auto;
+}
+
+/* スマホでは邪魔なら非表示 or 小さく */
+@media (max-width: 900px) {
+  .feature-illust {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .feature-illust img {
+    width: 100px;
+  }
+  /* 完全に消したいなら ↑ の代わりに
+  .feature-illust { display:none; }
+  */
+}

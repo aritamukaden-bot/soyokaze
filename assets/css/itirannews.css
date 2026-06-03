@@ -1,0 +1,25 @@
+
+/* ==========================
+   ページタイトル帯
+   ========================== */
+.page-title-bar {
+  width: 100%;
+  background-color: #f57c00; /* オレンジ */
+  padding: 20px 0;
+}
+
+.page-title-inner {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-title-bar h1 {
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+#itirannewsh1 {
+  text-align: center !important;
+}

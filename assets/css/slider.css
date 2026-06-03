@@ -1,0 +1,107 @@
+/* ====== リセット（隙間の元凶つぶし） ====== */
+#heroSlider, #heroSlider * { box-sizing: border-box; }
+#heroSlider figure { margin: 0; }        /* figureの初期マージンで左に隙間が出がち */
+#heroSlider img { display: block; }      /* inline画像の余白対策（行ボックスの隙間を消す） */
+
+/* ====== コンテナ ====== */
+.slider#heroSlider {
+  position: relative;
+  width: 100%;            /* 100vwはスクロールバー幅ぶんズレることがあるので使わない */
+  height: 100vh;          /* 好みで固定したくないなら後述のaspect-ratio案に変更可 */
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: #000;
+}
+
+/* ====== トラック（横並び） ====== */
+.slider__track {
+  display: flex;
+  height: 100%;
+  gap: 0;                 /* 念のため */
+  transition: transform 0.6s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* ====== 各スライド ====== */
+.slide {
+  flex: 0 0 100%;         /* 1スライド = 表示幅ちょうど */
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* ====== 画像（サイズ不揃いでもOKにする肝） ====== */
+.slide > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* 枠いっぱいにトリミングして中央を見せる */
+  object-position: center center;
+  filter: brightness(0.9); /* 任意 */
+}
+
+/* ====== キャプション ====== */
+.slide__caption {
+  position: absolute;
+  inset: auto 50% 8vh 50%;
+  transform: translate(-50%, 0);
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  font-size: clamp(18px, 2.2vw, 36px);
+  line-height: 1.6;
+  text-shadow: 0 4px 24px rgba(0,0,0,.7);
+  width: min(92vw, 1000px);
+}
+
+/* ====== 前後ボタン ====== */
+.slider__nav {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,.75);
+  cursor: pointer;
+  transition: background .2s ease;
+  z-index: 5;
+}
+.slider__nav:hover { background: rgba(255,255,255,1); }
+.slider__nav--prev { left: 16px; }
+.slider__nav--next { right: 16px; }
+
+/* ====== ドット ====== */
+.slider__dots {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+.slider__dot {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255,255,255,.7);
+  cursor: pointer;
+}
+.slider__dot[aria-current="true"] {
+  width: 24px;
+  background: #fff;
+}
+
+/* ====== モバイル微調整 ====== */
+@media (max-width: 640px) {
+  .slide__caption { font-size: clamp(15px, 4.2vw, 20px); }
+}
+
+/* ====== ユーザーがモーション軽減を希望する場合 ====== */
+@media (prefers-reduced-motion: reduce) {
+  .slider__track { transition: none; }
+}
