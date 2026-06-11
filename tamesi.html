@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【会員限定】団体員専用ポータルサイト</title>
+    <style>
+        /* 全体のデザイン（基本は普通のサイト風、少しサイバー感をプラス） */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #10b981; /* 成功を意味する緑のライン */
+        }
+        .success-flash {
+            background-color: #d1fae5;
+            color: #065f46;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 1px solid #a7f3d0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: #1e293b;
+            border-left: 5px solid #3b82f6;
+            padding-left: 10px;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .info-table th, .info-table td {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            text-align: left;
+        }
+        .info-table th {
+            background-color: #f8fafc;
+            width: 30%;
+        }
+        .notice-box {
+            background-color: #fffbeb;
+            border: 1px solid #fef3c7;
+            color: #92400e;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+        
+        /* 🤫 責任者ログインへ導く隠しエリアのデザイン */
+        .admin-trigger-zone {
+            margin-top: 50px;
+            padding: 20px;
+            border-top: 1px dashed #cbd5e1;
+            text-align: center;
+        }
+        /* 方法①：怪しいテキストリンク */
+        .secret-link {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .secret-link:hover {
+            color: #ef4444; /* ホバーすると赤くなって警告感が出る */
+            text-decoration: underline;
+        }
+        
+        /* デモ用のフッター注意書き（必須） */
+        footer {
+            margin-top: 100px;
+            background-color: #1e293b;
+            color: #94a3b8;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 侵入成功の演出メッセージ -->
+    <div class="success-flash">
+        🔓 [SUCCESS] 団体員用ネットワークへの接続に成功しました。
+    </div>
+
+    <header>
+        <h1>団体員専用マイページ</h1>
+        <p>ようこそ、テスト会員（ID:soyokaze1.2024@gmail.com ）さん</p>
+    </header>
+
+    <div class="container">
+        <h2></h2>
+        <p>あなたはセキュリティを突破し、以下の会員限定情報にアクセスしました。</p>
+        
+        <table class="info-table">
+            <tr>
+                <th>現在のステータス</th>
+                <td><span style="color: #10b981; font-weight: bold;">● オンライン（ログイン中）</span></td>
+            </tr>
+            <tr>
+                <th>所属グループ</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>次回の活動予定</th>
+                <td>2026年6月15日 13:00〜 定例ミーティング</td>
+            </tr>
+            <tr>
+                <th>共有情報</th>
+                <td></td>
+            </tr>
+        </table>
+
+        <div class="notice-box">
+            <strong>⚠️ 団体員へのお知らせ：</strong><br>
+            責任者（管理者）の方は、ページ下部の専用導線から「責任者システム」へアクセスしてください。
+        </div>
+
+        <!-- 🕵️‍♂️ 責任者ログインへの隠しエリア -->
+        <div class="admin-trigger-zone">
+            <p style="color: #94a3b8; font-size: 0.85rem;">――― 団体の一般システムはここまで ―――</p>
+            
+            <!-- ヒント付きの隠しリンク -->
+            <a href="/login_dummy/logintest2.html" class="secret-link">
+                [システム管理用] 責任者・管理者ログインはこちら
+            </a>
+        </div>
+    </div>
+
+    <footer>
+       
+    </footer>
+
+</body>
+</html>

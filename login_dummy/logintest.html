@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログインページ</title>
+    <style>
+        /* 全体のレイアウト調整 */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* ログインボックスのデザイン */
+        .login-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 380px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #333333;
+        }
+
+        /* 入力フォームのスタイル */
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        /* ボタンのスタイル */
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* エラーメッセージのスタイル */
+        .error-message {
+            color: #de3545;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 12px;
+            min-height: 20px; /* メッセージの有無でガタつかないように枠を確保 */
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>ログイン</h2>
+    <form id="loginForm">
+        <div class="input-group">
+            <label for="userId">ユーザーID</label>
+            <input type="text" id="userId" required placeholder="IDを入力してください">
+        </div>
+        <div class="input-group">
+            <label for="password">パスワード</label>
+            <input type="password" id="password" required placeholder="パスワードを入力してください">
+        </div>
+        <button type="submit" class="login-btn">ログイン</button>
+    </form>
+    <div id="errorMessage" class="error-message"></div>
+</div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        // 通常のページ遷移（リロード）をキャンセル
+        event.preventDefault();
+
+        // 画面に入力された値を取得
+        const inputId = document.getElementById('userId').value;
+        const inputPass = document.getElementById('password').value;
+        const errorDiv = document.getElementById('errorMessage');
+
+        // ----------------------------------------------------
+        // 【設定】ここに後からiDとpasswordを書いてください
+        // ----------------------------------------------------
+        const correctId = "soyokaze1.2024@gmail.com"; 
+        const correctPass = "000";
+        // ----------------------------------------------------
+
+        // 判定処理
+        if (inputId === correctId && inputPass === correctPass) {
+            // ログイン成功時の処理
+            errorDiv.style.color = "#28a745"; // 文字色を緑に
+            errorDiv.textContent = "ログインに成功しました！";
+            
+            // 教材用として、成功したことが分かりやすいようにアラートも出します
+            alert("ログイン成功！");
+            
+            // もしログイン後に別のページに飛ばしたい場合は、下の行のコメントアウト（//）を外してURLを書き換えてください
+            window.location.href = "/login_dummy/logintestview.html";
+            
+        } else {
+            // ログイン失敗時の処理
+            errorDiv.style.color = "#de3545"; // 文字色を赤に
+            errorDiv.textContent = "IDまたはパスワードが間違っています。";
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>RSA簡易計算ツール</title>
+<style>
+  body { font-family: sans-serif; padding: 20px; }
+  input { margin: 5px; padding: 5px; }
+  button { margin: 10px 0; padding: 8px; }
+</style>
+</head>
+<body>
+
+<h2>RSA簡易計算ツール</h2>
+
+<h3>公開鍵</h3>
+n: <input type="number" id="n" value="35"><br>
+e: <input type="number" id="e" value="5"><br>
+
+<h3>秘密鍵</h3>
+d: <input type="number" id="d" value="5"><br>
+
+<h3>メッセージ（数字）</h3>
+<input type="number" id="message" placeholder="例: 12"><br>
+
+<button onclick="encrypt()">暗号化</button>
+<p>暗号文: <span id="encrypted"></span></p>
+
+<button onclick="decrypt()">復号</button>
+<p>復号結果: <span id="decrypted"></span></p>
+
+<script>
+function modPow(base, exp, mod) {
+  let result = 1;
+  base = base % mod;
+  while (exp > 0) {
+    if (exp % 2 === 1) result = (result * base) % mod;
+    base = (base * base) % mod;
+    exp = Math.floor(exp / 2);
+  }
+  return result;
+}
+
+function encrypt() {
+  const n = Number(document.getElementById("n").value);
+  const e = Number(document.getElementById("e").value);
+  const x = Number(document.getElementById("message").value);
+
+  const y = modPow(x, e, n);
+  document.getElementById("encrypted").textContent = y;
+}
+
+function decrypt() {
+  const n = Number(document.getElementById("n").value);
+  const d = Number(document.getElementById("d").value);
+  const y = Number(document.getElementById("encrypted").textContent);
+
+  const x = modPow(Number(y), d, n);
+  document.getElementById("decrypted").textContent = x;
+}
+</script>
+
+</body>
+</html>

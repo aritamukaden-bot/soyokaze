@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【祝・ログイン成功】団体員専用ポータルサイト</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f0fdf4; /* 薄い緑の背景で爽やかにお祝い */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+        header {
+            background-color: #111827;
+            color: #ffffff;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 5px solid #10b981;
+        }
+        .congrats-banner {
+            background: linear-gradient(45deg, #10b981, #34d399);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.4rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+        h2 {
+            color: #065f46;
+            border-left: 5px solid #10b981;
+            padding-left: 10px;
+            font-size: 1.5rem;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .info-table th, .info-table td {
+            border: 1px solid #e2e8f0;
+            padding: 14px;
+            text-align: left;
+        }
+        .info-table th {
+            background-color: #f8fafc;
+            width: 30%;
+        }
+        .notice-box {
+            background-color: #fffbeb;
+            border: 1px solid #fef3c7;
+            color: #92400e;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+        .admin-trigger-zone {
+            margin-top: 50px;
+            padding: 20px;
+            border-top: 1px dashed #cbd5e1;
+            text-align: center;
+        }
+        .secret-link {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .secret-link:hover {
+            color: #ef4444;
+            text-decoration: underline;
+        }
+        footer {
+            margin-top: 100px;
+            background-color: #1e293b;
+            color: #94a3b8;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.8rem;
+        }
+
+        /* 🎉 紙吹雪風アニメーション */
+        .confetti-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; pointer-events: none;
+            z-index: 1;
+        }
+        .confetti {
+            position: absolute; width: 10px; height: 10px;
+            background-color: #f39c12;
+            animation: drop 3s infinite linear;
+        }
+        .confetti:nth-child(2n) { background-color: #e74c3c; animation-delay: 0.5s; }
+        .confetti:nth-child(3n) { background-color: #3498db; animation-delay: 1s; }
+        .confetti:nth-child(4n) { background-color: #2ecc71; animation-delay: 1.5s; }
+        @keyframes drop {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 1; left: calc(10% + 80% * var(--x, 0.5)); }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; left: calc(10% + 80% * var(--x, 0.5)); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="confetti-container">
+        <div class="confetti" style="--x: 0.1;"></div>
+        <div class="confetti" style="--x: 0.25;"></div>
+        <div class="confetti" style="--x: 0.4;"></div>
+        <div class="confetti" style="--x: 0.55;"></div>
+        <div class="confetti" style="--x: 0.7;"></div>
+        <div class="confetti" style="--x: 0.85;"></div>
+    </div>
+
+    <div class="congrats-banner">
+        🎉 おめでとうございます！ログインに成功しました！ 🍾
+    </div>
+
+    <header>
+        <h1>団体員専用マイページ</h1>
+        <p>ようこそ、テスト会員（ID: soyokaze1.2024@gmail.com ）さん</p>
+    </header>
+
+    <div class="container">
+        <h2>🔓 認証クリア！</h2>
+        <p>見事にセキュリティを突破し、会員限定情報へのアクセス権を取得しました！</p>
+        
+        <table class="info-table">
+            <tr>
+                <th>現在のステータス</th>
+                <td><span style="color: #10b981; font-weight: bold;">● オンライン（ログイン成功）</span></td>
+            </tr>
+            <tr>
+                <th>所属グループ</th>
+                <td>一般団体員</td>
+            </tr>
+            <tr>
+                <th>次回の活動予定</th>
+                <td>2026年6月15日 13:00〜 定例ミーティング</td>
+            </tr>
+            <tr>
+                <th>共有情報</th>
+                <td>ミッション完了。次のステップへ進めます。</td>
+            </tr>
+        </table>
+
+        <div class="notice-box">
+            <strong>⚠️ 団体員へのお知らせ：</strong><br>
+            さらに上位の権限をお持ちですか？ 責任者（管理者）の方は、ページ下部の専用導線から「責任者システム」へアクセスしてください。
+        </div>
+
+        <div class="admin-trigger-zone">
+            <p style="color: #94a3b8; font-size: 0.85rem;">――― 団体の一般システムはここまで ―――</p>
+            <a href="/login_dummy/logintest2.html" class="secret-link" target="_blank" rel="noopener noreferrer">
+                🕵️‍♂️ [システム管理用] さらに奥へ進む：責任者・管理者ログインはこちら
+            </a>
+        </div>
+    </div>
+
+    <footer></footer>
+
+</body>
+</html>
