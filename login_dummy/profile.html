@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会員登録情報 - 団体員専用ポータル</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts: Instrument Sans & Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Instrument Sans', 'Noto Sans JP', ui-sans-serif, system-ui, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+
+    <!-- 上部のナビゲーションバー -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <a href="./logintestview.html" class="font-bold text-xl tracking-tight text-gray-900 hover:text-gray-600 transition">団体員専用ポータル</a>
+                    <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
+                        会員情報
+                    </span>
+                </div>
+                <div>
+                    <a href="./testview.html" class="text-sm font-medium text-gray-500 hover:text-gray-900 transition flex items-center gap-1">
+                        &larr; ダッシュボードに戻る
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="flex-grow py-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- ページヘッダー -->
+            <div class="mb-8">
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900">ご登録情報の確認</h1>
+                <p class="mt-1 text-sm text-gray-500">現在システムに登録されているあなたの会員情報です。変更がある場合は事務局までご連絡ください。</p>
+            </div>
+
+            <!-- 会員登録情報カード（2列レイアウトのリスト） -->
+            <div class="bg-white shadow-xs rounded-2xl border border-gray-100 overflow-hidden">
+                
+                <!-- カード内のヘッダーエリア -->
+                <div class="px-6 py-5 border-b border-gray-100 bg-gray-50/50 flex justify-between items-center">
+                    <div>
+                        <h2 class="text-base font-semibold text-gray-900">基本プロフィール</h2>
+                        <p class="text-xs text-gray-500 mt-0.5">アカウントID: soyokaze1.2024@gmail.com</p>
+                    </div>
+                    <span class="inline-flex items-center rounded-full bg-green-50 px-2.5 py-1 text-xs font-semibold text-green-700 ring-1 ring-inset ring-green-200">
+                        正規会員
+                    </span>
+                </div>
+
+                <!-- 何行もある情報列（左に項目名、右に項目内容） -->
+                <div class="divide-y divide-gray-100">
+                    
+                    <!-- 1行目：名前 -->
+                    <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                        <dt class="text-sm font-medium text-gray-500">氏名</dt>
+                        <dd class="mt-1 text-sm text-gray-900 font-semibold sm:col-span-2 sm:mt-0">そよかぜ たろう (Kazama Soyoka)</dd>
+                    </div>
+
+                    <!-- 2行目：フリガナ -->
+                    <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                        <dt class="text-sm font-medium text-gray-500">フリガナ</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">そよかぜ　たろう</dd>
+                    </div>
+
+                    <!-- 3行目：誕生日 -->
+                    <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                        <dt class="text-sm font-medium text-gray-500">生年月日</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">1998年 8月 15日</dd>
+                    </div>
+
+                    <!-- 4行目：性別 -->
+                    <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                        <dt class="text-sm font-medium text-gray-500">性別</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">男性</dd>
+                    </div>
+
+                    <!-- 5行目：郵便番号 -->
+                    <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                        <dt class="text-sm font-medium text-gray-500">郵便番号</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">〒100-8111</dd>
+                    </div>
+
+                    <!-- 6行目：住所 -->
+                    <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                        <dt class="text-sm font-medium text-gray-500">住所</dt>
+                        <dd class="mt-1 text-sm text-gray-900 leading-relaxed sm:col-span-2 sm:mt-0">
+                              東京都千代田区<br>
+                            千代田1-1
+                        </dd>
+                    </div>
+
+                    <!-- 7行目：電話番号 -->
+                    <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                        <dt class="text-sm font-medium text-gray-500">電話番号</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">090-1192-8150</dd>
+                    </div>
+
+                    <!-- 8行目：会員登録日 -->
+                    <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                        <dt class="text-sm font-medium text-gray-500">入会登録日</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">2024年 4月 1日</dd>
+                    </div>
+
+                    <!-- 9行目：所属部署/グループ -->
+                    <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                        <dt class="text-sm font-medium text-gray-500">所属支部・グループ</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">東京第1支部 / 企画運営チーム</dd>
+                    </div>
+
+                    <!-- 10行目：会員有効期限 -->
+                    <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                        <dt class="text-sm font-medium text-gray-500">有効期限</dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">2027年 3月 31日まで自動更新</dd>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 下部注意書き（モダンな通知ボックス風） -->
+            <div class="mt-6 bg-gray-100 rounded-2xl p-4 text-xs text-gray-500 leading-relaxed">
+                ※ 引越しによる住所変更や改姓、メールアドレスの変更を希望される場合は、本ページを印刷またはキャプチャの上、事務局のサポート窓口まで必要事項を添えてご連絡ください。データの反映には通常2〜3営業日かかります。
+            </div>
+
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-white border-t border-gray-200 py-6">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-400">
+            &copy; 2026 団体員専用ポータルサイト. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

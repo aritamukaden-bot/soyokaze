@@ -58,41 +58,40 @@
         .login-btn {
             width: 100%;
             padding: 12px;
-            background-color: #007bff;
+            background-color: #7c3aed; /* 責任者用は高貴な紫系統に変更 */
+            color: #ffffff;
             border: none;
             border-radius: 4px;
-            color: white;
             font-size: 16px;
             cursor: pointer;
+            font-weight: bold;
             transition: background-color 0.2s;
+            margin-top: 10px;
         }
 
         .login-btn:hover {
-            background-color: #0056b3;
+            background-color: #6d28d9;
         }
 
-        /* エラーメッセージのスタイル */
+        /* エラーメッセージ用のスタイル */
         .error-message {
-            color: #de3545;
-            font-size: 14px;
+            margin-top: 16px;
             text-align: center;
-            margin-top: 12px;
-            min-height: 20px; /* メッセージの有無でガタつかないように枠を確保 */
+            font-size: 14px;
+            font-weight: bold;
+            min-height: 20px;
         }
     </style>
 </head>
 <body>
 
 <div class="login-container">
-    <h2>ログイン</h2>
+    <h2>責任者ログイン</h2>
     <form id="loginForm">
+        <!-- ユーザーID入力を完全に撤去し、パスワードだけに絞りました -->
         <div class="input-group">
-            <label for="userId">ユーザーID</label>
-            <input type="text" id="userId" required placeholder="IDを入力してください">
-        </div>
-        <div class="input-group">
-            <label for="password">パスワード</label>
-            <input type="password" id="password" required placeholder="パスワードを入力してください">
+            <label for="password">責任者用パスワード</label>
+            <input type="password" id="password" placeholder="パスワードを入力" required>
         </div>
         <button type="submit" class="login-btn">ログイン</button>
     </form>
@@ -104,34 +103,32 @@
         // 通常のページ遷移（リロード）をキャンセル
         event.preventDefault();
 
-        // 画面に入力された値を取得
-        const inputId = document.getElementById('userId').value;
+        // 画面に入力されたパスワードの値のみを取得
         const inputPass = document.getElementById('password').value;
         const errorDiv = document.getElementById('errorMessage');
 
         // ----------------------------------------------------
-        // 【設定】ここに後からiDとpasswordを書いてください
+        // 【設定】正しいパスワード（責任者用）
         // ----------------------------------------------------
-        const correctId = "soyokaze.takeuti@.com"; 
         const correctPass = "admin";
         // ----------------------------------------------------
 
-        // 判定処理
-        if (inputId === correctId && inputPass === correctPass) {
-            // ログイン成功時の処理
+        // エラー色を初期化（基本は赤）
+        errorDiv.style.color = "#dc3545";
+
+        // パスワードの単一判定処理
+        if (inputPass !== correctPass) {
+            // パスワードが一致しない場合
+            errorDiv.textContent = "パスワードが違います";
+        } else {
+            // パスワードが一致した場合（ログイン成功）
             errorDiv.style.color = "#28a745"; // 文字色を緑に
             errorDiv.textContent = "ログインに成功しました！";
             
-            // 教材用として、成功したことが分かりやすいようにアラートも出します
             alert("ログイン成功！");
             
-            // もしログイン後に別のページに飛ばしたい場合は、下の行のコメントアウト（//）を外してURLを書き換えてください
-            window.location.href = "./logintestview2.html";
-            
-        } else {
-            // ログイン失敗時の処理
-            errorDiv.style.color = "#de3545"; // 文字色を赤に
-            errorDiv.textContent = "IDまたはパスワードが間違っています。";
+            // ログイン成功後の責任者マイページへ遷移
+            window.location.href = "./testview2.html";
         }
     });
 </script>
