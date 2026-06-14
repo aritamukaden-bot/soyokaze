@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>お問い合わせ - 団体員専用ポータル</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family:
+          "Instrument Sans", "Noto Sans JP", ui-sans-serif, system-ui,
+          sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-3">
+            <a
+              href="./testview.html"
+              class="font-bold text-xl tracking-tight text-gray-900 hover:opacity-80"
+              >団体員専用ポータル</a
+            >
+            <span
+              class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"
+            >
+              お問い合わせ
+            </span>
+          </div>
+
+          <nav class="hidden md:flex items-center gap-6 text-sm">
+            <a
+              href="./testview.html"
+              class="py-5 text-gray-500 hover:text-gray-900"
+              >ホーム</a
+            >
+            <a
+              href="./membership.html"
+              class="py-5 text-gray-500 hover:text-gray-900"
+              >会員案内</a
+            >
+            <a
+              href="./contact.html"
+              class="py-5 text-gray-900 font-semibold border-b-2 border-gray-900"
+              >お問い合わせ</a
+            >
+          </nav>
+
+          <div class="flex items-center gap-4">
+            <span class="hidden sm:inline text-xs text-gray-500">
+              ログイン中: soyokaze1.2024@gmail.com
+            </span>
+            <a
+              href="./profile.html"
+              class="inline-flex items-center justify-center rounded-xl bg-gray-950 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 transition"
+            >
+              会員情報
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="md:hidden bg-white border-t border-gray-100 flex justify-around py-2.5 text-xs text-gray-500"
+      >
+        <a href="./testview.html" class="flex flex-col items-center gap-1"
+          ><span>🏠 ホーム</span></a
+        >
+        <a href="./membership.html" class="flex flex-col items-center gap-1"
+          ><span>📖 会員案内</span></a
+        >
+        <a
+          href="./contact.html"
+          class="flex flex-col items-center gap-1 text-gray-900 font-semibold"
+          ><span>✉️ お問い合わせ</span></a
+        >
+      </div>
+    </header>
+
+    <main class="flex-grow py-10">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <section
+          class="bg-white shadow-xs rounded-2xl border border-gray-100 p-6 sm:p-7"
+        >
+          <h2 class="text-xl font-bold text-gray-900">お問い合わせ</h2>
+          <p class="text-sm text-gray-500 mt-2 leading-relaxed">
+            団体運営に関するご質問、年会費の確認、システムの不具合などについて、以下のフォームよりご連絡ください。
+          </p>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            class="md:col-span-2 bg-white shadow-xs rounded-2xl border border-gray-100 p-6 sm:p-8"
+          >
+            <div id="contact-form-container">
+              <form
+                id="contact-form"
+                action="https://formspree.io/f/mwvjalnk"
+                method="POST"
+                class="space-y-5"
+              >
+                <div>
+                  <label
+                    class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
+                    >ログインアカウント</label
+                  >
+                  <input
+                    type="text"
+                    value="soyokaze1.2024@gmail.com"
+                    disabled
+                    class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm font-semibold text-gray-500 cursor-not-allowed"
+                  />
+                  <input
+                    type="hidden"
+                    name="email"
+                    value="soyokaze1.2024@gmail.com"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    for="contact-name"
+                    class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
+                    >お名前 <span class="text-red-500">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="contact-name"
+                    name="お名前"
+                    required
+                    placeholder="山田 太郎"
+                    class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-900 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 outline-hidden transition"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    for="contact-category"
+                    class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
+                    >お問い合わせ区分 <span class="text-red-500">*</span></label
+                  >
+                  <select
+                    id="contact-category"
+                    name="お問い合わせ区分"
+                    required
+                    class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-900 bg-white focus:border-gray-900 focus:ring-1 focus:ring-gray-900 outline-hidden transition"
+                  >
+                    <option value="" disabled selected>選択してください</option>
+                    <option value="annual-fee">年会費の支払について</option>
+                    <option value="activity">活動・イベント参加について</option>
+                    <option value="system">
+                      システムの不具合・ログインについて
+                    </option>
+                    <option value="leave">休会・退会のご相談</option>
+                    <option value="other">その他のお問い合わせ</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    for="contact-message"
+                    class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
+                    >お問い合わせ内容 <span class="text-red-500">*</span></label
+                  >
+                  <textarea
+                    id="contact-message"
+                    name="お問い合わせ内容"
+                    required
+                    rows="5"
+                    placeholder="ご質問やご連絡内容を詳細にご入力ください。"
+                    class="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-900 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 outline-hidden transition resize-none"
+                  ></textarea>
+                </div>
+
+                <div class="pt-2">
+                  <button
+                    type="submit"
+                    class="w-full inline-flex items-center justify-center rounded-xl bg-gray-950 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 transition cursor-pointer"
+                  >
+                    上記内容で送信する
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div
+              id="contact-success-container"
+              class="hidden text-center py-8 space-y-4"
+            >
+              <div
+                class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-50 text-green-600 border border-green-100 text-2xl font-bold"
+              >
+                ✓
+              </div>
+              <h3 class="text-lg font-bold text-gray-900">
+                お問い合わせを送信しました
+              </h3>
+              <p class="text-sm text-gray-600 max-w-md mx-auto leading-relaxed">
+                お問い合わせの受付を完了いたしました。内容を確認次第、3営業日以内に事務局（soyokaze1.2024@gmail.com宛）よりご連絡差し上げます。
+              </p>
+              <div class="pt-4">
+                <button
+                  onclick="resetContactForm()"
+                  class="inline-flex items-center justify-center rounded-xl bg-gray-100 border border-gray-200 px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-gray-200 transition cursor-pointer"
+                >
+                  続けてお問い合わせする
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div
+              class="bg-white shadow-xs rounded-2xl border border-gray-100 p-5 space-y-4"
+            >
+              <h3 class="text-sm font-bold text-gray-900">対応について</h3>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                事務局の営業時間を以下の通りとなっております。時間外にいただいたお問い合わせは、翌営業日以降の対応となります。
+              </p>
+              <div
+                class="text-xs text-gray-500 space-y-1 bg-gray-50 p-3 rounded-lg font-mono"
+              >
+                <p>月曜〜金曜: 9:00〜18:00</p>
+                <p>土日祝日: 休業（緊急対応除く）</p>
+              </div>
+            </div>
+
+            <div
+              class="bg-amber-50/60 rounded-2xl border border-amber-100 p-5 space-y-2"
+            >
+              <h4 class="text-xs font-bold text-amber-950">
+                お急ぎの連絡の場合
+              </h4>
+              <p class="text-xs text-amber-800 leading-relaxed">
+                直近の活動予定（定例ミーティング、ボランティア当日など）への欠席・遅刻連絡は、各地区の運営担当リーダーへ直接チャットツール等でご連絡ください。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 py-6 mt-auto">
+      <div
+        class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-400"
+      >
+        &copy; 2026 団体員専用ポータルサイト. All rights reserved.
+      </div>
+    </footer>
+
+    <script>
+      // フォームの非同期送信イベント処理
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const form = e.target;
+          const data = new FormData(form);
+          const button = form.querySelector('button[type="submit"]');
+
+          button.disabled = true;
+          button.innerText = "送信中...";
+
+          // Formspreeのバックエンドへ非同期送信
+          fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: {
+              Accept: "application/json",
+            },
+          })
+            .then((response) => {
+              if (response.ok) {
+                document
+                  .getElementById("contact-form-container")
+                  .classList.add("hidden");
+                document
+                  .getElementById("contact-success-container")
+                  .classList.remove("hidden");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              } else {
+                alert("送信に失敗しました。時間をおいて再度お試しください。");
+                button.disabled = false;
+                button.innerText = "上記内容で送信する";
+              }
+            })
+            .catch((error) => {
+              alert("通信エラーが発生しました。");
+              button.disabled = false;
+              button.innerText = "上記内容で送信する";
+            });
+        });
+
+      // フォームのリセット
+      function resetContactForm() {
+        document.getElementById("contact-form").reset();
+        const button = document.querySelector(
+          '#contact-form button[type="submit"]',
+        );
+        button.disabled = false;
+        button.innerText = "上記内容で送信する";
+        document
+          .getElementById("contact-form-container")
+          .classList.remove("hidden");
+        document
+          .getElementById("contact-success-container")
+          .classList.add("hidden");
+      }
+    </script>
+  </body>
+</html>

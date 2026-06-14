@@ -1,19 +1,157 @@
 /* ------ トップの左右レイアウト ------ */
 @font-face {
-  font-family: 'KachoFuugetsuP';
-  src: url('../fonts/katyoup/kacho-fugetsu-p.ttf') format('truetype');
+  font-family: "KachoFuugetsuP";
+  src: url("../fonts/katyoup/kacho-fugetsu-p.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
-
-.logo-text,h1,h2{
-  font-family: 'KachoFuugetsuP', serif;
+.logo-text,
+h1,
+h2 {
+  font-family: "KachoFuugetsuP", serif;
 }
 
+/* ===================================================
+   ★ イントロ演出用の追加・修正（ここから一番下に貼り付け）
+   =================================================== */
 
+/* 1. イントロの土台（背景を一番手前に固定して中身を完全に隠す） */
+.intro {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  /* 元の綺麗なグラデーション背景を活かして、一番手前に持ってきます */
+  background: linear-gradient(#f7fff9, #ecfbf3) !important;
+  z-index: 99999 !important;
+  overflow: hidden;
+}
 
+/* 2. キャンバス（風と積もる葉っぱ）をタイトルや写真の【手前】に配置 */
+#wind,
+#pile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 100 !important; /* タイトル(30)や写真(20)より大きい数値で手前に */
+  pointer-events: none; /* 後ろのボタンをクリックできるようにスルーさせる */
+}
 
+/* 3. 真ん中のタイトル（風の後ろ・写真の手前） */
+#mainTitle {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30 !important; /* 写真(20)よりは手前、風(100)よりは奥 */
+  white-space: nowrap;
+}
+
+/* 4. 写真コンテナ（風やタイトルよりも【奥側】に配置） */
+.intro-photos {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 24px;
+  z-index: 20 !important; /* 風(100)やタイトル(30)より小さい数値で一番奥に */
+  pointer-events: none;
+}
+
+/* 写真1枚ずつの初期状態（最初は透明で少し下にある） */
+.intro-photo {
+  width: 190px; /* 綺麗に見えるサイズ */
+  height: 250px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(33, 75, 43, 0.15);
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 1.5s ease,
+    transform 1.5s ease;
+}
+
+/* JavaScriptで「show」クラスがついた時のふわふわアニメーション */
+.intro-photo.show {
+  opacity: 1;
+  transform: translateY(0);
+  animation: soyokazeFloat 4s ease-in-out infinite alternate;
+}
+
+/* 写真ごとに浮き上がるタイミングを少しだけずらす */
+.intro-photo:nth-child(2).show {
+  animation-delay: 0.4s;
+}
+.intro-photo:nth-child(3).show {
+  animation-delay: 0.8s;
+}
+
+@keyframes soyokazeFloat {
+  0% {
+    transform: translateY(0px) rotate(-1deg);
+  }
+  100% {
+    transform: translateY(-12px) rotate(1.5deg);
+  }
+}
+
+/* 5. そよかぜのなかへ進むボタン（これだけはクリックできるように一番手前） */
+.intro-btn {
+  position: absolute;
+  bottom: 12vh;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  padding: 14px 38px;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #214b2b;
+  border: 2px solid #2ecc71;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  z-index: 200 !important; /* キャンバス(100)よりも手前にして確実にクリック可能にする */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ボタンが表示される時 */
+.intro-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) scale(1);
+}
+
+/* ボタンにマウスを乗せたとき */
+.intro-btn:hover {
+  background-color: #265c3b;
+  color: #fff;
+  border-color: #265c3b;
+  box-shadow: 0 8px 20px rgba(38, 92, 59, 0.3);
+  transform: translateX(-50%) scale(1.03);
+}
+
+/* タブレット・スマホ画面での写真のサイズ調整 */
+@media (max-width: 768px) {
+  .intro-photos {
+    gap: 12px;
+    width: 90%;
+    justify-content: center;
+  }
+  .intro-photo {
+    width: 28vw;
+    height: 38vw;
+    border-radius: 10px;
+  }
+}
 
 .top-layout {
   display: flex;
@@ -49,7 +187,7 @@
 
 /* 右上のそよかぜアイコンの見た目 */
 .logo-icon {
-  width: 80px;      /* ← 好きなサイズに。40〜60pxくらいがオススメ */
+  width: 80px; /* ← 好きなサイズに。40〜60pxくらいがオススメ */
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
@@ -69,13 +207,9 @@
   transition: background-color 0.3s ease;
 }
 
-
-
-.nav-toggle .logo-icon:hover{
+.nav-toggle .logo-icon:hover {
   background-color: #286986; /* 水色になる */
 }
-
-
 
 /* スマホ表示 */
 @media (max-width: 850px) {
@@ -120,7 +254,7 @@
   border-radius: 24px;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
   text-decoration: none;
   color: inherit;
 }
@@ -138,7 +272,7 @@
 
 .article_txt .prefecture {
   font-size: 14px;
-  color: #4CAF50;
+  color: #4caf50;
   margin-bottom: 4px;
 }
 
@@ -160,10 +294,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  
 }
-
-
 
 /* タイトル＋イラスト */
 .main_txt_wrap {
@@ -179,15 +310,11 @@
   color: #214b2b;
 }
 
-
-
 /* スライダー外枠 */
 .comp-banner-slider_show .slider_wrap {
   border-radius: 24px;
   overflow: hidden;
 }
-
-
 
 /* スマホレイアウト */
 @media (max-width: 900px) {
@@ -218,7 +345,6 @@
   }
 }
 
-
 /* スマホ用（必要なら） */
 @media (max-width: 768px) {
   .slider--small {
@@ -227,27 +353,19 @@
 }
 /* 右側の小さいスライダー専用（詳細度を上げて slider.css に勝つ） */
 #heroSlider.slider.slider--small {
-  height: 300px;   /* ← 好きな高さに。まずは 200px くらい試してみて */
+  height: 300px; /* ← 好きな高さに。まずは 200px くらい試してみて */
 }
 
 /* スマホ用（必要なら） */
 @media (max-width: 900px) {
   #heroSlider.slider.slider--small {
-    height: 160px;  /* ← スマホで少し低めに */
+    height: 160px; /* ← スマホで少し低めに */
   }
 }
 
-.comp-banner-slider_show{
-    margin-top: 180px;
+.comp-banner-slider_show {
+  margin-top: 180px;
 }
-
-
-
-
-
-
-
-
 
 /* ==========================
    団体概要：横長の円＋3枚カード
@@ -270,8 +388,8 @@
 /* 左側：横長の“円”っぽい背景 */
 .overview-bg {
   flex: 1;
-  background: #f5f6ef;          /* スクショみたいな薄い色 */
-  border-radius: 60px;          /* 横長の円っぽくする */
+  background: #f5f6ef; /* スクショみたいな薄い色 */
+  border-radius: 60px; /* 横長の円っぽくする */
   padding: 40px 50px;
 }
 
@@ -287,7 +405,7 @@
 
 .overview-card-img img {
   width: 100%;
-  height: 160px;                /* 好みで調整 */
+  height: 160px; /* 好みで調整 */
   object-fit: cover;
   border-radius: 18px;
 }
@@ -310,13 +428,13 @@
 
 /* 右側：縦書き「団体概要」ボックス */
 .overview-side {
-  width: 120px;                 /* 右の余白・幅 */
+  width: 120px; /* 右の余白・幅 */
   display: flex;
   justify-content: center;
 }
 
 .overview-title-box {
-  writing-mode: vertical-rl;    /* 縦書き */
+  writing-mode: vertical-rl; /* 縦書き */
   border: 1px solid #333;
   padding: 24px 10px;
   font-size: 18px;
@@ -348,7 +466,6 @@
   }
 }
 
-
 /* =======================
    団体概要へ飛ぶボタン
    ======================= */
@@ -361,13 +478,15 @@
 .overview-btn {
   display: inline-block;
   padding: 14px 36px;
-  background: #31633c;     /* 深緑：ココロココ系の色 */
+  background: #31633c; /* 深緑：ココロココ系の色 */
   color: #fff;
   text-decoration: none;
   border-radius: 30px;
   font-size: 16px;
   font-weight: 600;
-  transition: background .2s ease, transform .2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .overview-btn:hover {
@@ -386,10 +505,9 @@
    代表紹介セクション
    ========================== */
 
-.photo{
+.photo {
   object-position: 50% 85%;
 }
-
 
 /* ==========================
    活動紹介セクション
@@ -459,7 +577,7 @@
 /* 活動紹介カード：左テキスト／右写真の横並び */
 .activity-card {
   display: flex;
-  flex-direction: row-reverse;  /* ← 写真を右、文字を左にするポイント！ */
+  flex-direction: row-reverse; /* ← 写真を右、文字を左にするポイント！ */
   align-items: center;
   gap: 40px;
   max-width: 100%;
@@ -478,11 +596,10 @@
 /* 写真を大きめに */
 .activity-card-img img {
   width: 100%;
-  height: 380px;   /* ← 好きな大きさに変えてOK（400〜500くらいが綺麗） */
+  height: 380px; /* ← 好きな大きさに変えてOK（400〜500くらいが綺麗） */
   object-fit: cover;
   border-radius: 24px;
 }
-
 
 /* スマホでは縦並びに戻す */
 @media (max-width: 900px) {
@@ -492,12 +609,9 @@
   }
 
   .activity-card-img img {
-    height: 190px;   /* もともとの指定と同じくらいでOK */
+    height: 190px; /* もともとの指定と同じくらいでOK */
   }
 }
-
-
-
 
 .activity-card-body {
   margin-top: 16px;
@@ -535,19 +649,15 @@
   line-height: 1.6;
 }
 
-
-
-
-.activity-card-img>.photo{
+.activity-card-img > .photo {
   object-position: 50% 50%;
 }
-.activity-card-img>.photo2{
+.activity-card-img > .photo2 {
   object-position: 60% 60%;
 }
-.activity-card-img>.photo3{
+.activity-card-img > .photo3 {
   object-position: 50% 50%;
 }
-
 
 /* 矢印ボタン */
 .activity-arrow {
@@ -568,7 +678,7 @@
 }
 
 .activity-arrow--prev {
-  left: -40px;   /* 背景の外にはみ出させる */
+  left: -40px; /* 背景の外にはみ出させる */
 }
 
 .activity-arrow--next {
@@ -631,7 +741,6 @@
   }
 }
 
-
 /* ==========================
    代表挨拶セクション
    ========================== */
@@ -685,7 +794,7 @@
   height: 360px;
   object-fit: cover;
   border-radius: 20px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
 /* テキスト */
@@ -707,13 +816,15 @@
 .representative-btn {
   display: inline-block;
   padding: 14px 36px;
-  background: #31633c;     /* 深緑 */
+  background: #31633c; /* 深緑 */
   color: #fff;
   text-decoration: none;
   border-radius: 30px;
   font-size: 16px;
   font-weight: 600;
-  transition: background .2s ease, transform .2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .representative-btn:hover {
@@ -726,7 +837,7 @@
     flex-direction: column;
     gap: 24px;
   }
-  
+
   .representative-bg {
     width: 100%;
     padding: 24px;
@@ -744,18 +855,14 @@
   }
 }
 
-
-
-
-
 /* ==========================
    魅力紹介（特集記事スライダー）
    ========================== */
 
 .feature-section {
-  background: #4ea046;          /* スクショのような緑 */
+  background: #4ea046; /* スクショのような緑 */
   padding: 80px 0;
-  border-radius: 0 0 60px 60px;  /* 下側カーブ */
+  border-radius: 0 0 60px 60px; /* 下側カーブ */
   margin-bottom: 60px;
 }
 
@@ -893,10 +1000,9 @@
   }
 }
 
-
 .instagram-section {
   padding: 60px 20px;
-   /* うすい水色（そよかぜっぽい） */
+  /* うすい水色（そよかぜっぽい） */
 }
 
 .instagram-inner {
@@ -911,7 +1017,6 @@
   margin-bottom: 30px;
   color: #333;
 }
-
 
 /*お問い合わせ*/
 /* お問い合わせセクション */
@@ -1016,55 +1121,60 @@
   }
 }
 
-
-.footer-p{
-   margin: 0 auto;
+.footer-p {
+  margin: 0 auto;
   text-align: center;
 }
 
-:root{
-  --leaf1:#2ecc71; 
-  --leaf2:#27ae60; 
-  --leaf3:#1faa59;
+:root {
+  --leaf1: #2ecc71;
+  --leaf2: #27ae60;
+  --leaf3: #1faa59;
 }
 
-.intro{
-  position:fixed; inset:0; z-index:9999; 
-  display:grid; place-items:center;
-  background:linear-gradient(#f7fff9,#ecfbf3);
-  overflow:hidden;
-  transition:opacity 1s ease;
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(#f7fff9, #ecfbf3);
+  overflow: hidden;
+  transition: opacity 1s ease;
 }
-.title{
-  position:absolute; 
-  text-align:center; 
-  font-weight:800; 
-  color:#08301f;
-  font-size:clamp(30px,6vw,70px);
-  opacity:1; 
-  transition:opacity 1s ease;
+.title {
+  position: absolute;
+  text-align: center;
+  font-weight: 800;
+  color: #08301f;
+  font-size: clamp(30px, 6vw, 70px);
+  opacity: 1;
+  transition: opacity 1s ease;
 }
-.hint{
-  position:fixed; left:50%; bottom:8vh;
-  transform:translateX(-50%);
-  background:#ffffffd9;
-  border:1px solid #e3efe7;
-  padding:10px 14px;
-  border-radius:12px;
-  font-weight:700;
-  color:#0e3a26;
-  z-index:10000;
-  transition:opacity .4s ease;
+.hint {
+  position: fixed;
+  left: 50%;
+  bottom: 8vh;
+  transform: translateX(-50%);
+  background: #ffffffd9;
+  border: 1px solid #e3efe7;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  color: #0e3a26;
+  z-index: 10000;
+  transition: opacity 0.4s ease;
 }
-.hint.hide{ opacity:0; pointer-events:none; }
-
+.hint.hide {
+  opacity: 0;
+  pointer-events: none;
+}
 
 /* ============================================
    スマホ・タブレット時：縦書きタイトルを
    上部の横書き見出しに置き換える
    ============================================ */
 @media (max-width: 900px) {
-
   /* 1) 既存の縦書きボックスを非表示にする */
   .overview-side,
   .activity-side,
@@ -1104,14 +1214,13 @@
   }
 }
 
-
 /* ==========================
    Instagram（SnapWidget）をレスポンシブに
    ========================== */
 .snapwidget-widget {
-  width: 100% !important;   /* 画面幅にフィットさせる */
+  width: 100% !important; /* 画面幅にフィットさせる */
   max-width: 100%;
-  height: 1078px;           /* 高さはとりあえず元のまま。後で好みで調整OK */
+  height: 1078px; /* 高さはとりあえず元のまま。後で好みで調整OK */
   border: none;
   display: block;
 }
@@ -1119,24 +1228,21 @@
 /* スマホでは高さも少し低めにしたい場合（お好みで） */
 @media (max-width: 600px) {
   .snapwidget-widget {
-    height: 700px !important;  /* もう少し短くしたければここを変える */
+    height: 700px !important; /* もう少し短くしたければここを変える */
   }
 }
 
-.irasuto{
-  
+.irasuto {
   max-width: 400px;
-
 }
 /* 代表挨拶セクションのイラスト位置調整 */
 .representative-inner {
-  position: relative;  /* イラストの基準にする */
+  position: relative; /* イラストの基準にする */
 }
-
 
 /* イラストの大きさ */
 .illust_img img {
-  width: 180px;     /* 好きな大きさに調整：150〜220px くらいがバランス良い */
+  width: 180px; /* 好きな大きさに調整：150〜220px くらいがバランス良い */
   height: auto;
 }
 /* ==========================
@@ -1148,13 +1254,13 @@
 
 .feature-illust {
   position: absolute;
-  right: 40px;   /* 右端からの距離：調整OK */
-  bottom: 20px;  /* 下端からの距離：調整OK */
-  z-index: 2;    /* スライダーより手前に出す */
+  right: 40px; /* 右端からの距離：調整OK */
+  bottom: 20px; /* 下端からの距離：調整OK */
+  z-index: 2; /* スライダーより手前に出す */
 }
 
 .feature-illust img {
-  width: 150px;  /* 大きさ。120〜180pxくらい好みで */
+  width: 150px; /* 大きさ。120〜180pxくらい好みで */
   height: auto;
 }
 
