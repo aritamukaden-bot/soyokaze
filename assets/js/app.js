@@ -3,12 +3,10 @@ window.addEventListener("DOMContentLoaded", () => {
   const intro = document.getElementById("intro");
   const mainTitle = document.getElementById("mainTitle");
 
-  // すでに訪問済みなら、イントロをスキップ
   if (sessionStorage.getItem("visited")) {
-    intro.style.display = "none"; // エフェクトを非表示
-    mainTitle.style.opacity = 1; // タイトルを普通に表示
+    intro.style.display = "none";
+    mainTitle.style.opacity = 1;
   } else {
-    // 初回訪問時のみ風エフェクトを実行
     sessionStorage.setItem("visited", "true");
   }
 });
@@ -16,10 +14,9 @@ window.addEventListener("DOMContentLoaded", () => {
 (() => {
   // ===== 共通 =====
   const R = (a, b) => a + Math.random() * (b - a);
-  let STORM = false; // タッチ/クリックで強風モード
-  let pileStarted = false; // 積もりフェーズ開始済みか
+  let STORM = false;
+  let pileStarted = false;
 
-  // CSS変数を実色へ解決（Canvasに無効色が入らないように）
   let LEAF_COLORS = [];
   function initLeafColors() {
     const cs = getComputedStyle(document.documentElement);
@@ -32,7 +29,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // ===== 風（前半） =====
   const CFG = {
-    DURATION: 5200,
+    DURATION: 7000, // 全体の最大担保時間
     ANGLE: (18 * Math.PI) / 180,
     PARTICLES: 380,
     LEAVES: 60,
@@ -41,10 +38,6 @@ window.addEventListener("DOMContentLoaded", () => {
   };
   const intro = document.getElementById("intro");
   const title = document.getElementById("mainTitle");
-
-  // ★追加: 新設した写真とボタンの要素を取得
-  const introBtn = document.getElementById("introBtn");
-  const photoElements = document.querySelectorAll(".intro-photo");
 
   const wind = document.getElementById("wind");
   const wctx = wind.getContext("2d");
@@ -68,6 +61,7 @@ window.addEventListener("DOMContentLoaded", () => {
     wind.style.width = pile.style.width = innerWidth + "px";
     wind.style.height = pile.style.height = innerHeight + "px";
   }
+
   function initWind() {
     resize();
     parts = Array.from({ length: CFG.PARTICLES }, () => ({
@@ -90,34 +84,67 @@ window.addEventListener("DOMContentLoaded", () => {
       col: Math.random() < 0.5 ? "rgba(46,204,113,0.9)" : "rgba(39,174,96,0.9)",
     }));
 
-    // ★追加: 写真とボタンを順番に表示させるタイマーを作動
-    startTimeline();
+    // ⚡【ここを変更】ページ読み込み完了後、少し風が吹いてからパズルアニメーションを開始
+    setTimeout(() => {
+      startPuzzleAnimation();
+    }, 600);
   }
 
-  // ★追加: 写真とボタンを時間差で出す関数
-  function startTimeline() {
-    // 1.5秒後から写真を順番にフェードイン
-    photoElements.forEach((photo, index) => {
-      setTimeout(
-        () => {
-          photo.classList.add("show");
-        },
-        1500 + index * 400,
-      );
+  // ⚡【追加】GSAPを使った能登半島パズルのタイムライン制御
+  function startPuzzleAnimation() {
+    if (typeof gsap === "undefined") {
+      // 万が一GSAPが読み込めなかった場合は自動で強風フェーズへ
+      goStorm();
+      return;
+    }
+
+    const puzzleTl = gsap.timeline();
+
+    // 1. 各パズルピースが画面の外（ランダム）から中央へ吸い寄せられる
+    puzzleTl.fromTo(
+      ".puzzle-piece",
+      {
+        x: () => Math.random() * window.innerWidth - window.innerWidth / 2,
+        y: () => Math.random() * window.innerHeight - window.innerHeight / 2,
+        scale: 0.4,
+        rotation: () => Math.random() * 60 - 30,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotation: 0,
+        opacity: 1,
+        duration: 2.3,
+        stagger: 0.12,
+        ease: "power2.out",
+      },
+    );
+
+    // 2. 写真がすべて出揃った瞬間に、地図の線を「ぴかっと」100%表示
+    puzzleTl.to("#map-line", {
+      opacity: 1,
+      duration: 0.05, // 一瞬で現れる
+      ease: "power1.in",
     });
 
-    // 3.5秒後にボタンをフェードイン
-    setTimeout(() => {
-      if (!STORM && introBtn) {
-        introBtn.classList.add("show");
-      }
-    }, 3500);
+    // 3. 線が出てパズルが完成したら、0.5秒だけ余韻を挟んで「自動で強風」を発動！
+    puzzleTl.to(
+      {},
+      {
+        duration: 0.5,
+        onComplete: () => {
+          goStorm(); // 強風モード発動命令
+        },
+      },
+    );
   }
 
   const easeInOut = (t) =>
     t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
   function gust(t) {
-    const boost = STORM ? 28 : 16; // タッチ後強風
+    const boost = STORM ? 28 : 16;
     const base = STORM ? 1.1 : 0.7;
     const mid = Math.pow(Math.max(0, (t - 0.4) / 0.6), 2) * boost;
     return base + easeInOut(t) * 1.2 + mid;
@@ -129,7 +156,6 @@ window.addEventListener("DOMContentLoaded", () => {
       speed = gust(t);
     wctx.clearRect(0, 0, w, h);
 
-    // 粒子
     for (const p of parts) {
       const sway = Math.sin(now * 0.004 + p.ph) * (0.7 * p.z) * dpr;
       p.x += dirX * speed * p.z * dpr + sway * 0.25;
@@ -149,7 +175,6 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // 背景の小葉
     for (const lf of leaves) {
       const scale = STORM ? 1.3 : 1;
       lf.x += dirX * speed * 0.9 * lf.z * dpr * scale;
@@ -174,7 +199,6 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // 風は常に回す。条件を満たしたら積もりを一度だけ開始
     if ((STORM || elapsed >= CFG.DURATION) && !pileStarted) startPilePhase();
     requestAnimationFrame(drawWind);
   }
@@ -193,8 +217,8 @@ window.addEventListener("DOMContentLoaded", () => {
     fallers = [];
 
   function makeLeaf(isSettled = false, y0 = -40, progress = 0) {
-    const growthByProgress = 1 + progress * 0.6; // 終盤ほど大きく
-    const growthByStorm = STORM ? 1.8 : 1.0; // STORMでさらに増量
+    const growthByProgress = 1 + progress * 0.6;
+    const growthByStorm = STORM ? 1.8 : 1.0;
     const size =
       R(PILE.SIZE[0], PILE.SIZE[1]) * growthByProgress * growthByStorm;
     const col = LEAF_COLORS[(Math.random() * LEAF_COLORS.length) | 0];
@@ -223,12 +247,12 @@ window.addEventListener("DOMContentLoaded", () => {
       makeLeaf(false, -R(20, 200), 0),
     );
 
-    // ★追加: 強風フェーズが始まったらボタンと写真をフェードアウト
-    if (introBtn) introBtn.classList.remove("show");
+    // ⚡【ここを変更】強風フェーズ（積もり）が始まったら、タイトルと能登パズルをまとめてフェードアウト
     const introPhotos = document.getElementById("introPhotos");
     if (introPhotos) {
-      introPhotos.style.transition = "opacity 0.8s ease";
+      introPhotos.style.transition = "opacity 0.8s ease, transform 0.8s ease";
       introPhotos.style.opacity = "0";
+      introPhotos.style.transform = "translate(-50%, -50%) scale(0.95)"; // すこし奥に引きながら消えるとかっこいい
     }
 
     requestAnimationFrame(drawPile);
@@ -307,34 +331,21 @@ window.addEventListener("DOMContentLoaded", () => {
       }
       requestAnimationFrame(drawPile);
     } else {
-      // タイトル & イントロをフェード → 本文だけ残す
       const introEl = document.getElementById("intro");
       const titleEl = document.getElementById("mainTitle");
-      titleEl.style.opacity = "0";
-      introEl.style.opacity = "0";
+      if (titleEl) titleEl.style.opacity = "0";
+      if (introEl) introEl.style.opacity = "0";
       setTimeout(() => {
-        introEl.remove();
+        if (introEl) introEl.remove();
       }, 1000);
     }
   }
 
-  // ===== 入力: ボタンをクリックした時に STORM（強風）へ =====
+  // ===== STORM（強風モード）移行処理 =====
   function goStorm() {
     if (STORM) return;
     STORM = true;
   }
-
-  // ★変更: 画面全体のどこを触っても発動するのではなく、ボタン単体にイベントを紐づけ
-  if (introBtn) {
-    introBtn.addEventListener("click", goStorm);
-  }
-  window.addEventListener("keydown", (e) => {
-    if (
-      (e.key === "Enter" || e.key === " ") &&
-      document.activeElement === introBtn
-    )
-      goStorm();
-  });
 
   // ===== 起動 =====
   window.addEventListener("resize", resize, { passive: true });

@@ -1,46 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja"> <!-- 言語を日本語に -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>学生団体そよかぜ｜石巻・能登で活動する学生ボランティア団体</title>
 
-  <!-- 検索結果に表示される説明文 -->
-  <meta name="description" content="学生団体そよかぜは、宮城県石巻市・石川県能登町を中心に、地域の魅力発信や防災・子ども支援を行う学生ボランティア団体です。現地に行って考える活動を大切にしています。">
+    <!-- 検索結果に表示される説明文 -->
+    <meta name="description" content="学生団体そよかぜは、宮城県石巻市・石川県能登町を中心に、地域の魅力発信や防災・子ども支援を行う学生ボランティア団体です。現地に行って考える活動を大切にしています。">
 
-  
     <link rel="stylesheet" href="assets/css/sanitize.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/slider.css">
-  <link rel="stylesheet" href="assets/css/nav.css">
- <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "学生団体そよかぜ",
-  "url": "http://soyokaze-hp.s3-website-ap-northeast-1.amazonaws.com/",
-  "description": "能登町や石巻市で活動する学生ボランティア団体",
-  "logo": "http://soyokaze-hp.s3-website-ap-northeast-1.amazonaws.com/assets/image/そよかぜマーク.jpg"
-}
-</script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/slider.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
+    
+    <!-- ⚡【追加】パズルアニメーションを動かすための部品（GSAP） -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "学生団体そよかぜ",
+      "url": "http://soyokaze-hp.s3-website-ap-northeast-1.amazonaws.com/",
+      "description": "能登町や石巻市で活動する学生ボランティア団体",
+      "logo": "http://soyokaze-hp.s3-website-ap-northeast-1.amazonaws.com/assets/image/そよかぜマーク.jpg"
+    }
+    </script>
 </head>
 <body>
-  <!-- ▼ 風エフェクト（イントロ）ここから -->
+
+<!-- ▼ 風＆能登パズルエフェクト（イントロ）ここから -->
 <div class="intro" id="intro">
   <canvas id="wind"></canvas>
   <canvas id="pile"></canvas>
   
   <div class="title" id="mainTitle">ただいまと思える場所を作る</div>
 
-  <div class="intro-photos" id="introPhotos">
-    <img src="assets/image/LINE_ALBUM_あばれ祭り②神輿_251122_2.jpg" alt="活動風景1" class="intro-photo">
-    <img src="assets/image/LINE_ALBUM_つなぐマーケット_251121_4.jpg" alt="活動風景2" class="intro-photo">
-    <img src="assets/image/LINE_ALBUM_2025年能登活動with自由の森学園高校_251113_2.jpg" alt="活動風景3" class="intro-photo">
-  </div>
+  <!-- ⚡【ここを修正】元の3枚の写真を消し、能登半島のパズルコンテナを配置（すべて背景透明の前提） -->
+  <div class="puzzle-container" id="introPhotos">
+  <img src="./assets/image/piece_01.jpg" class="puzzle-piece" alt="">
+  <img src="./assets/image/piece_02.jpg" class="puzzle-piece" alt="">
+  <img src="./assets/image/piece_03.jpg" class="puzzle-piece" alt="">
+  <img src="./assets/image/piece_04.jpg" class="puzzle-piece" alt="">
+  <img src="./assets/image/piece_05.jpg" class="puzzle-piece" alt="">
+  <img src="./assets/image/piece_06.jpg" class="puzzle-piece" alt="">
+  <img src="./assets/image/piece_07.jpg" class="puzzle-piece" alt="">
+  <img src="./assets/image/piece_08.jpg" class="puzzle-piece" alt="">
+  <img src="./assets/image/piece_09.jpg" class="puzzle-piece" alt="">
+  
+  <!-- 最後にピカッと浮かび上がる地図の線 -->
+  <img src="assets/image/noto_line.png" id="map-line" alt="">
+</div>
 
-  <button class="intro-btn" id="introBtn">ボタンを押す</button>
+  <!-- ボタンはフルオートのため削除しました -->
 </div>
 <!-- ▲ 風エフェクト ここまで -->
 
