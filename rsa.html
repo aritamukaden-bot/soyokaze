@@ -1,64 +1,129 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-<meta charset="UTF-8">
-<title>RSA簡易計算ツール</title>
-<style>
-  body { font-family: sans-serif; padding: 20px; }
-  input { margin: 5px; padding: 5px; }
-  button { margin: 10px 0; padding: 8px; }
-</style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>RSA授業用ツール 完全版（数字入力版）</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      input,
+      textarea {
+        margin: 5px;
+        padding: 5px;
+      }
+      textarea {
+        width: 300px;
+        height: 60px;
+      }
+      button {
+        margin: 10px 5px;
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>RSA暗号ツール（数字入力版）</h2>
 
-<h2>RSA簡易計算ツール</h2>
+    <h3>鍵</h3>
+    n: <input type="number" id="n" value="35" /> e:
+    <input type="number" id="e" value="5" /> d:
+    <input type="number" id="d" value="5" />
 
-<h3>公開鍵</h3>
-n: <input type="number" id="n" value="35"><br>
-e: <input type="number" id="e" value="5"><br>
+    <hr />
 
-<h3>秘密鍵</h3>
-d: <input type="number" id="d" value="5"><br>
+    <h3>① 数字 → 暗号化</h3>
+    入力（数字、カンマ区切り）:<br />
+    <input id="plainText" placeholder="例: 14,5,11,15" /><br />
 
-<h3>メッセージ（数字）</h3>
-<input type="number" id="message" placeholder="例: 12"><br>
+    <button onclick="encrypt()">暗号化</button>
 
-<button onclick="encrypt()">暗号化</button>
-<p>暗号文: <span id="encrypted"></span></p>
+    <p>入力された数字: <span id="numbers"></span></p>
+    <p>暗号: <span id="encrypted"></span></p>
 
-<button onclick="decrypt()">復号</button>
-<p>復号結果: <span id="decrypted"></span></p>
+    <hr />
 
-<script>
-function modPow(base, exp, mod) {
-  let result = 1;
-  base = base % mod;
-  while (exp > 0) {
-    if (exp % 2 === 1) result = (result * base) % mod;
-    base = (base * base) % mod;
-    exp = Math.floor(exp / 2);
-  }
-  return result;
-}
+    <h3>② 暗号 → 復号</h3>
+    暗号入力（カンマ区切り）:<br />
+    <textarea id="cipherInput" placeholder="例: 14,10,16,15"></textarea><br />
 
-function encrypt() {
-  const n = Number(document.getElementById("n").value);
-  const e = Number(document.getElementById("e").value);
-  const x = Number(document.getElementById("message").value);
+    <button onclick="decrypt()">復号</button>
 
-  const y = modPow(x, e, n);
-  document.getElementById("encrypted").textContent = y;
-}
+    <p>復号（数字）: <span id="decrypted"></span></p>
+    <p>ローマ字: <span id="romaji"></span></p>
 
-function decrypt() {
-  const n = Number(document.getElementById("n").value);
-  const d = Number(document.getElementById("d").value);
-  const y = Number(document.getElementById("encrypted").textContent);
+    <script>
+      // A=1〜Z=26 （※①では使いませんが、②の復号表示用に残しています）
+      function charToNum(c) {
+        return c.charCodeAt(0) - 64;
+      }
+      function numToChar(n) {
+        return String.fromCharCode(n + 64);
+      }
 
-  const x = modPow(Number(y), d, n);
-  document.getElementById("decrypted").textContent = x;
-}
-</script>
+      // 高速べき乗
+      function modPow(base, exp, mod) {
+        let result = 1;
+        base %= mod;
+        while (exp > 0) {
+          if (exp % 2 === 1) result = (result * base) % mod;
+          base = (base * base) % mod;
+          exp = Math.floor(exp / 2);
+        }
+        return result;
+      }
 
-</body>
+      // 暗号化（数字から直接暗号化）
+      function encrypt() {
+        const n = Number(document.getElementById("n").value);
+        const e = Number(document.getElementById("e").value);
+
+        // カンマ区切りの文字列を数字の配列に変換
+        const input = document.getElementById("plainText").value;
+        let nums = input
+          .split(",")
+          .map((x) => Number(x.trim()))
+          .filter((x) => !isNaN(x) && x !== 0);
+        let enc = [];
+
+        for (let num of nums) {
+          // 割る数(n)以上の数字はRSA暗号の性質上正しく暗号・復号できないためチェック
+          if (num >= n) {
+            alert(
+              "エラー: 鍵 n (" + n + ") より小さい数字を入力してください。",
+            );
+            return;
+          }
+          enc.push(modPow(num, e, n));
+        }
+
+        document.getElementById("numbers").textContent = nums.join(", ");
+        document.getElementById("encrypted").textContent = enc.join(", ");
+      }
+
+      // 復号
+      function decrypt() {
+        const n = Number(document.getElementById("n").value);
+        const d = Number(document.getElementById("d").value);
+        const input = document.getElementById("cipherInput").value;
+
+        let enc = input
+          .split(",")
+          .map((x) => Number(x.trim()))
+          .filter((x) => !isNaN(x));
+        let dec = [];
+        let chars = [];
+
+        for (let y of enc) {
+          let x = modPow(y, d, n);
+          dec.push(x);
+          chars.push(numToChar(x));
+        }
+
+        document.getElementById("decrypted").textContent = dec.join(", ");
+        document.getElementById("romaji").textContent = chars.join("");
+      }
+    </script>
+  </body>
 </html>
