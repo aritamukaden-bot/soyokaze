@@ -1211,6 +1211,7 @@ h2 {
   pointer-events: none;
 }
 
+
 /* ============================================
    スマホ・タブレット時：縦書きタイトルを
    上部の横書き見出しに置き換える
@@ -1258,14 +1259,30 @@ h2 {
 /* ==========================
    Instagram（SnapWidget）をレスポンシブに
    ========================== */
-.snapwidget-widget {
-  width: 100% !important; /* 画面幅にフィットさせる */
-  max-width: 100%;
-  height: 1078px; /* 高さはとりあえず元のまま。後で好みで調整OK */
-  border: none;
-  display: block;
-}
 
+
+/* ============================================
+  インスタ
+   ============================================ */
+/* インスタのコンテナを相対位置にする */
+.instagram-container {
+  position: relative;
+  display: block;        /* inline-blockからblockに変更 */
+  margin: 0 auto;       /* 左右の余白を自動調整して中央へ */
+  max-width: 100%;       /* レスポンシブ対応 */
+  width: 990px;          /* iframeの横幅（990px）に合わせる */
+}
+/* iframeの上に透明な座布団（カバー）を敷いてクリックを無効化する */
+.instagram-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent; /* 透明 */
+  z-index: 10;            /* iframeより前面に配置 */
+}
 /* スマホでは高さも少し低めにしたい場合（お好みで） */
 @media (max-width: 600px) {
   .snapwidget-widget {
