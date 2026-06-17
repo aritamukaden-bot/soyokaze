@@ -63,7 +63,7 @@
         padding: 10px;
         border-left: 5px solid #2c3e50;
         border-radius: 3px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       }
       span {
         font-weight: bold;
@@ -72,20 +72,20 @@
     </style>
   </head>
   <body>
-    <h2>RSA暗号ツール（n=1007 対応版）</h2>
+    <h2>RSA暗号ツール（n=1651 対応版）</h2>
 
     <div class="key-section">
       <h3>鍵の設定</h3>
-      公開鍵 n: <input type="number" id="n" value="1651" /> &nbsp;&nbsp; 公開鍵
-      e: <input type="number" id="e" value="5" /> &nbsp;&nbsp; 秘密鍵 d:
-      <input type="number" id="d" value="605" />
+      公開鍵 n: <input type="number" id="n" value="1651" /> &nbsp;&nbsp;
+      公開鍵 e: <input type="number" id="e" value="5" /> &nbsp;&nbsp;
+      秘密鍵 d: <input type="number" id="d" value="605" />
     </div>
 
     <hr />
 
     <h3>① 数字 → 暗号化（送信者の操作）</h3>
     送りたいメッセージ（数字、カンマ区切りで複数入力可）:<br />
-    <input id="plainText" value="777" placeholder="例: 777" /><br />
+    <input id="plainText" value="" placeholder="例: 777" /><br />
 
     <button onclick="encrypt()">暗号化する</button>
 
@@ -96,7 +96,7 @@
 
     <h3>② 暗号 → 復号（受信者の操作）</h3>
     届いた暗号文（数字、カンマ区切り）:<br />
-    <textarea id="cipherInput" placeholder="例: 413">413</textarea><br />
+    <textarea id="cipherInput" placeholder="例: "></textarea><br />
 
     <button onclick="decrypt()">復号する</button>
 
@@ -109,7 +109,7 @@
         let e = BigInt(exp);
         let m = BigInt(mod);
         let result = 1n;
-
+        
         b = b % m;
         while (e > 0n) {
           if (e % 2n === 1n) result = (result * b) % m;
@@ -131,7 +131,7 @@
           .map((x) => x.trim())
           .filter((x) => x !== "")
           .map((x) => Number(x));
-
+          
         if (nums.length === 0 || nums.some(isNaN)) {
           alert("エラー: 正しい数字を入力してください。");
           return;
@@ -141,11 +141,7 @@
         for (let num of nums) {
           // メッセージが n 以上だと暗号化の理論上元に戻らなくなるためチェック
           if (num >= n) {
-            alert(
-              "エラー: メッセージは 鍵 n (" +
-                n +
-                ") より小さい数字にしてください。",
-            );
+            alert("エラー: メッセージは 鍵 n (" + n + ") より小さい数字にしてください。");
             return;
           }
           enc.push(modPow(num, e, n));
